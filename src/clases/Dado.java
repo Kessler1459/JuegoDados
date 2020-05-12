@@ -32,6 +32,7 @@ public class Dado {
     private void asignarImagen()
     {
         imagen=new ImageIcon("Imagenes/"+getNumero()+".jpg");
+///tu vieja///
     }
 
     public int tirarDado()
