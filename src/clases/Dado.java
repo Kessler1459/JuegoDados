@@ -31,27 +31,7 @@ public class Dado {
 
     private void asignarImagen()
     {
-        switch (numero)
-        {
-            case 1:
-                imagen=new ImageIcon("Imagenes/1.jpg");
-                break;
-            case 2:
-                imagen=new ImageIcon("Imagenes/2.jpg");
-                break;
-            case 3:
-                imagen=new ImageIcon("Imagenes/3.jpg");
-                break;
-            case 4:
-                imagen=new ImageIcon("Imagenes/4.jpg");
-                break;
-            case 5:
-                imagen=new ImageIcon("Imagenes/5.jpg");
-                break;
-            case 6:
-                imagen=new ImageIcon("Imagenes/6.jpg");
-                break;
-        }
+        imagen=new ImageIcon("Imagenes/"+getNumero()+".jpg");
     }
 
     public int tirarDado()
