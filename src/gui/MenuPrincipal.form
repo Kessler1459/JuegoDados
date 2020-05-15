@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.MenuPrincipal">
+  <grid id="27dc6" binding="jPanel" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="167" y="161" width="1424" height="228"/>
+    </constraints>
+    <properties>
+      <preferredSize width="800" height="400"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="b19dd" class="javax.swing.JLabel" binding="lJugador1">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <font size="16"/>
+          <text value="Jugador 1"/>
+        </properties>
+      </component>
+      <component id="d7e3" class="javax.swing.JLabel" binding="lJugador2">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <font size="16"/>
+          <text value="Jugador 2"/>
+        </properties>
+      </component>
+      <component id="5bf72" class="javax.swing.JTextField" binding="fieldJugador1">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="30"/>
+            <preferred-size width="140" height="30"/>
+            <maximum-size width="140" height="30"/>
+          </grid>
+          <gridbag top="0" left="5" bottom="0" right="0" weightx="1.0" weighty="0.3"/>
+        </constraints>
+        <properties>
+          <margin top="2" left="6" bottom="2" right="6"/>
+          <maximumSize width="180" height="32"/>
+          <minimumSize width="180" height="32"/>
+          <preferredSize width="180" height="32"/>
+        </properties>
+      </component>
+      <component id="90a43" class="javax.swing.JTextField" binding="fieldJugador3">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="30"/>
+            <preferred-size width="140" height="30"/>
+            <maximum-size width="140" height="30"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="0.3"/>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <margin top="2" left="6" bottom="2" right="6"/>
+          <maximumSize width="180" height="32"/>
+          <minimumSize width="180" height="32"/>
+          <preferredSize width="180" height="32"/>
+        </properties>
+      </component>
+      <component id="c17e4" class="javax.swing.JTextField" binding="fieldJugador4">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="30"/>
+            <preferred-size width="140" height="30"/>
+            <maximum-size width="140" height="30"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="0.3"/>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <margin top="2" left="6" bottom="2" right="6"/>
+          <maximumSize width="180" height="32"/>
+          <minimumSize width="180" height="32"/>
+          <preferredSize width="180" height="32"/>
+        </properties>
+      </component>
+      <component id="f2705" class="javax.swing.JButton" binding="generalaButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="30"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="0.6"/>
+        </constraints>
+        <properties>
+          <font size="18"/>
+          <maximumSize width="170" height="40"/>
+          <minimumSize width="170" height="40"/>
+          <preferredSize width="170" height="40"/>
+          <text value="Generala"/>
+        </properties>
+      </component>
+      <component id="b4662" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.5"/>
+        </constraints>
+        <properties>
+          <font size="20"/>
+          <text value=" Titulo"/>
+        </properties>
+      </component>
+      <component id="9794c" class="javax.swing.JTextField" binding="fieldJugador2">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="30"/>
+            <preferred-size width="140" height="30"/>
+            <maximum-size width="140" height="30"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="0.3"/>
+        </constraints>
+        <properties>
+          <margin top="2" left="6" bottom="2" right="6"/>
+          <maximumSize width="180" height="32"/>
+          <minimumSize width="180" height="32"/>
+          <preferredSize width="180" height="32"/>
+        </properties>
+      </component>
+      <component id="ed6b1" class="javax.swing.JButton" binding="diezMilButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="30"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="0.6"/>
+        </constraints>
+        <properties>
+          <font size="18"/>
+          <maximumSize width="170" height="40"/>
+          <minimumSize width="170" height="40"/>
+          <preferredSize width="170" height="40"/>
+          <text value="Diez Mil"/>
+        </properties>
+      </component>
+      <component id="de5eb" class="javax.swing.JLabel" binding="lJugador4">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="2" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <font size="16"/>
+          <text value="Jugador 4"/>
+        </properties>
+      </component>
+      <component id="2354e" class="javax.swing.JLabel" binding="lJugador3">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <alignmentY value="0.5"/>
+          <font size="16"/>
+          <text value="Jugador 3"/>
+        </properties>
+      </component>
+      <component id="49f75" class="javax.swing.JCheckBox" binding="checkJugador3">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <borderPainted value="false"/>
+          <horizontalAlignment value="0"/>
+          <margin top="20" left="2" bottom="0" right="2"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="3f581" class="javax.swing.JCheckBox" binding="checkJugador4">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <margin top="20" left="0" bottom="0" right="0"/>
+          <text value=""/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

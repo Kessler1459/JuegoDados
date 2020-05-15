@@ -32,13 +32,19 @@ public class Dado {
     private void asignarImagen()
     {
         imagen=new ImageIcon("Imagenes/"+getNumero()+".jpg");
-///tu vieja///
     }
 
-    public int tirarDado()
+    public Dado tirarDado()                  //tira el dado y lo devuelve
     {
         Random ran=new Random();
         setNumero(1+ran.nextInt(6));
-        return numero;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Dado{" +
+                "numero=" + numero +
+                '}';
     }
 }
