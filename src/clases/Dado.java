@@ -31,7 +31,7 @@ public class Dado {
 
     private void asignarImagen()
     {
-        imagen=new ImageIcon("Imagenes/"+getNumero()+".jpg");
+        imagen=new ImageIcon("Imagenes/"+getNumero()+".png");
     }
 
     public Dado tirarDado()                  //tira el dado y lo devuelve

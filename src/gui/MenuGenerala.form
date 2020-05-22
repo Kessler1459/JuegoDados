@@ -1,15 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.MenuGenerala">
-  <grid id="27dc6" binding="panel" layout-manager="GridBagLayout">
+  <grid id="27dc6" binding="panelPrincipal" layout-manager="FlowLayout" hgap="20" vgap="30" flow-align="1">
     <constraints>
-      <xy x="20" y="20" width="700" height="900"/>
+      <xy x="20" y="20" width="1150" height="700"/>
     </constraints>
     <properties>
-      <maximumSize width="700" height="900"/>
-      <minimumSize width="700" height="900"/>
-      <preferredSize width="700" height="900"/>
+      <background color="-16170752"/>
+      <maximumSize width="1150" height="580"/>
+      <minimumSize width="1150" height="580"/>
+      <preferredSize width="1150" height="580"/>
     </properties>
     <border type="none"/>
-    <children/>
+    <children>
+      <grid id="b8f95" binding="panelDados" layout-manager="FlowLayout" hgap="40" vgap="49" flow-align="1">
+        <constraints/>
+        <properties>
+          <alignmentX value="0.5"/>
+          <background color="-16170752"/>
+          <maximumSize width="460" height="470"/>
+          <minimumSize width="460" height="470"/>
+          <preferredSize width="460" height="470"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="6f91d" class="javax.swing.JLabel" binding="lDado1">
+            <constraints/>
+            <properties>
+              <maximumSize width="100" height="100"/>
+              <minimumSize width="100" height="100"/>
+              <opaque value="false"/>
+              <preferredSize width="100" height="100"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="b6345" class="javax.swing.JLabel" binding="lDado2">
+            <constraints/>
+            <properties>
+              <maximumSize width="100" height="100"/>
+              <minimumSize width="100" height="100"/>
+              <opaque value="false"/>
+              <preferredSize width="100" height="100"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="95969" class="javax.swing.JLabel" binding="lDado3">
+            <constraints/>
+            <properties>
+              <maximumSize width="100" height="100"/>
+              <minimumSize width="100" height="100"/>
+              <opaque value="false"/>
+              <preferredSize width="100" height="100"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="1a8a" class="javax.swing.JLabel" binding="lDado4">
+            <constraints/>
+            <properties>
+              <maximumSize width="100" height="100"/>
+              <minimumSize width="100" height="100"/>
+              <opaque value="false"/>
+              <preferredSize width="100" height="100"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="74a7c" class="javax.swing.JLabel" binding="lDado5">
+            <constraints/>
+            <properties>
+              <maximumSize width="100" height="100"/>
+              <minimumSize width="100" height="100"/>
+              <opaque value="false"/>
+              <preferredSize width="100" height="100"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="62fd2" class="javax.swing.JLabel" binding="lDado6">
+            <constraints/>
+            <properties>
+              <maximumSize width="100" height="100"/>
+              <minimumSize width="100" height="100"/>
+              <opaque value="false"/>
+              <preferredSize width="100" height="100"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="71d8c" class="javax.swing.JButton" binding="btnTirar">
+            <constraints/>
+            <properties>
+              <alignmentY value="0.5"/>
+              <horizontalTextPosition value="0"/>
+              <margin top="0" left="0" bottom="0" right="0"/>
+              <maximumSize width="200" height="50"/>
+              <minimumSize width="200" height="50"/>
+              <preferredSize width="200" height="50"/>
+              <text value="Button"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="388f8" binding="panelPuntos" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints/>
+        <properties>
+          <background color="-16170752"/>
+          <maximumSize width="600" height="452"/>
+          <minimumSize width="600" height="452"/>
+          <opaque value="false"/>
+          <preferredSize width="600" height="452"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="e8038" class="javax.swing.JTable" binding="lTable">
+            <constraints/>
+            <properties>
+              <autoResizeMode value="4"/>
+              <background color="-16170752"/>
+              <cellSelectionEnabled value="false"/>
+              <columnSelectionAllowed value="false"/>
+              <fillsViewportHeight value="false"/>
+              <font size="16"/>
+              <foreground color="-16777216"/>
+              <gridColor color="-16777216"/>
+              <maximumSize width="605" height="465"/>
+              <minimumSize width="605" height="465"/>
+              <opaque value="true"/>
+              <preferredScrollableViewportSize width="0" height="0"/>
+              <preferredSize width="605" height="465"/>
+              <rowHeight value="35"/>
+              <rowMargin value="0"/>
+            </properties>
+            <clientProperties>
+              <JTable.autoStartsEdit class="java.lang.Boolean" value="false"/>
+            </clientProperties>
+          </component>
+        </children>
+      </grid>
+    </children>
   </grid>
 </form>

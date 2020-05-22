@@ -5,18 +5,21 @@ import java.util.ArrayList;
 public abstract class Juego {
     private ArrayList<Jugador> jugadores;
     private ArrayList<Dado> dados;
+    private int turno;
 
 
     public Juego() {
         dados=new ArrayList<Dado>();
         jugadores=new ArrayList<Jugador>();
         inicializarDados();
+        turno=0;
     }
 
     public Juego(ArrayList<Jugador> jugadores) {
         this.jugadores = jugadores;
         dados=new ArrayList<Dado>();
         inicializarDados();
+        turno=0;
     }
 
     private void inicializarDados()
@@ -61,6 +64,19 @@ public abstract class Juego {
 
     public void setDados(ArrayList<Dado> dados) {
         dados = dados;
+    }
+
+    public void pasarTurno()
+    {
+        if (turno!=jugadores.size()-1)
+        {
+            turno++;
+        }
+        else turno=0;
+    }
+
+    public int getTurno() {
+        return turno;
     }
 
     @Override
