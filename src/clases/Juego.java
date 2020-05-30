@@ -10,21 +10,21 @@ public abstract class Juego {
 
     public Juego() {
         dados=new ArrayList<Dado>();
-        jugadores=new ArrayList<Jugador>();
+        jugadores=new ArrayList<>();
         inicializarDados();
-        turno=0;
+        turno=1;
     }
 
     public Juego(ArrayList<Jugador> jugadores) {
         this.jugadores = jugadores;
         dados=new ArrayList<Dado>();
         inicializarDados();
-        turno=0;
+        turno=1;
     }
 
     private void inicializarDados()
     {
-        for (int i=0;i<6;i++)
+        for (int i=0;i<5;i++)
         {
             dados.add(new Dado());
         }
@@ -38,9 +38,9 @@ public abstract class Juego {
         }
     }
 
-    public void tirarDados(int a,int b, int c, int d, int e, int f)           //TIRA INDIVIDUALMENTE SEGUN POSICION, SOLO SI SON DISTINTOS DE 0(llena con 0 los que no quieras tirar)
+    public void tirarDados(int a,int b, int c, int d, int e)           //TIRA INDIVIDUALMENTE SEGUN POSICION, SOLO SI SON DISTINTOS DE 0(llena con 0 los que no quieras tirar)
     {
-        int arr[]=new int[]{a,b,c,d,e,f};
+        int arr[]=new int[]{a,b,c,d,e};
         for (int i=0;i<6;i++)
         {
             if (arr[i]!=0)

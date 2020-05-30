@@ -13,4 +13,16 @@ public class Generala extends Juego {
         super(jugadores);
         tiradas=0;
     }
+
+    @Override
+    public void tirarDados() {
+        super.tirarDados();
+        tiradas++;
+    }
+
+    @Override
+    public void tirarDados(int a, int b, int c, int d, int e) {
+        super.tirarDados(a, b, c, d, e);
+        tiradas++;
+    }
 }
