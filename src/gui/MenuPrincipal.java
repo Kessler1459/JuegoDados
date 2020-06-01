@@ -10,13 +10,15 @@ import java.util.ArrayList;
 
 public class MenuPrincipal extends JFrame {
 
+    private MenuGenerala menuGenerala;
+    private ArrayList<Jugador> jugadores;
 
     private JPanel jPanel;
     private JCheckBox checkJugador4;
     private JCheckBox checkJugador3;
     private JTextField fieldJugador1;
     private JTextField fieldJugador2;
-    private JTextField fieldJugador3;
+    private JTextField fieldJugador3; //todo talvez hacer un arreglo 
     private JTextField fieldJugador4;
     private JButton diezMilButton;
     private JButton generalaButton;
@@ -24,8 +26,12 @@ public class MenuPrincipal extends JFrame {
     private JLabel lJugador2;
     private JLabel lJugador3;
     private JLabel lJugador4;
-    private ArrayList<Jugador> jugadores;
 
+
+    /**
+     * frame inicial del juego
+     * @param titulo titulo que tendra la ventana
+     */
     public MenuPrincipal(String titulo) {
         super(titulo);
         this.setContentPane(jPanel);
@@ -37,17 +43,17 @@ public class MenuPrincipal extends JFrame {
 
         generalaButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                    //preguntar excepcion campos vacios
+            public void actionPerformed(ActionEvent e) {                    //todo preguntar excepcion campos vacios
                 cargarListaDeJugadores();
                 Generala generala = new Generala(jugadores);
-                MenuGenerala menuGenerala = new MenuGenerala(titulo, generala);
+                menuGenerala = new MenuGenerala(titulo, generala);
             }
         });
         checkJugador3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (checkJugador3.isSelected()) {
-                    fieldJugador3.setEnabled(true);
+                    fieldJugador3.setEnabled(true); //todo modularizar esto, talvez otra clase check
                 } else fieldJugador3.setEnabled(false);
             }
         });
@@ -61,11 +67,10 @@ public class MenuPrincipal extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        MenuPrincipal frame = new MenuPrincipal("titulo");
-        frame.setVisible(true);
-    }
 
+    /**
+     * *llena el arraylist de jugadores con los textfield de cada jugador
+     */
     private void cargarListaDeJugadores()
     {
         String jugador1 = fieldJugador1.getText().trim();

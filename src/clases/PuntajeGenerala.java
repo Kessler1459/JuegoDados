@@ -2,6 +2,9 @@ package clases;
 
 import java.util.HashMap;
 
+/**
+ * setters y getters de todas las categorias de la generala
+ */
 public class PuntajeGenerala {
     private HashMap<String,String> tabla;
 

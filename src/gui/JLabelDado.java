@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * Jlabel para las imagenes clickeables de los dados
+ */
 public class JLabelDado extends JLabel{
 
     private MouseListener listener;
@@ -16,6 +19,9 @@ public class JLabelDado extends JLabel{
         this.addMouseListener(listener);
     }
 
+    /**
+     * inicia el listener para hacer el Jlabel clickeable
+     */
     private void instanciarListener()
     {
         listener=new MouseListener() {

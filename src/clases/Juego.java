@@ -22,6 +22,10 @@ public abstract class Juego {
         turno=1;
     }
 
+
+    /**
+     * instancia el arreglo de 5 dados que inician en 0
+     */
     private void inicializarDados()
     {
         for (int i=0;i<5;i++)
@@ -30,7 +34,10 @@ public abstract class Juego {
         }
     }
 
-    public void tirarDados()                                //TIRA TODOS LOS DADOS DEL ARRAYLIST
+    /**
+     * tira todos los dados del arraylist
+     */
+    public void tirarDados()
     {
         for (Dado dado:dados)
         {
@@ -38,7 +45,11 @@ public abstract class Juego {
         }
     }
 
-    public void tirarDados(int a,int b, int c, int d, int e)           //TIRA INDIVIDUALMENTE SEGUN POSICION, SOLO SI SON DISTINTOS DE 0(llena con 0 los que no quieras tirar)
+
+    /**
+     * tira dados individualmente, segun su posicion, usando ceros y unos
+     */
+    public void tirarDados(int a,int b, int c, int d, int e)
     {
         int arr[]=new int[]{a,b,c,d,e};
         for (int i=0;i<6;i++)
@@ -49,6 +60,20 @@ public abstract class Juego {
             }
         }
     }
+
+
+    /**
+     * aumenta el valor del turno hacia el siguiente jugador, de ser el ultimo se vuelve a 0
+     */
+    public void pasarTurno()
+    {
+        if (turno!=jugadores.size()-1)
+        {
+            turno++;
+        }
+        else turno=0;
+    }
+
 
     public ArrayList<Jugador> getJugadores() {
         return jugadores;
@@ -66,14 +91,6 @@ public abstract class Juego {
         dados = dados;
     }
 
-    public void pasarTurno()
-    {
-        if (turno!=jugadores.size()-1)
-        {
-            turno++;
-        }
-        else turno=0;
-    }
 
     public int getTurno() {
         return turno;

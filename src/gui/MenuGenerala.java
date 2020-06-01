@@ -36,7 +36,10 @@ public class MenuGenerala extends JFrame {
 
     }
 
-    private void iniciarLabelsDado()                //inicializa tod0 el arreglo, setea la imagen inicial y lo agrega al panel de dados
+    /**
+     * inicializa el arreglo de JlabelDado, les setea una imagen inicial y lo agrega al panel de dados
+     */
+    private void iniciarLabelsDado()
     {
         labelDado = new JLabelDado[5];
         ImageIcon imagen = new ImageIcon("Imagenes\\6.png");
@@ -47,27 +50,28 @@ public class MenuGenerala extends JFrame {
         }
     }
 
-    private void iniciarBotonTirarDados()        //inicializa, setea y agrega al panel de dados
+
+    /**
+     * inicializa, setea y agrega el boton de tirar al panel de los dados
+     */
+    private void iniciarBotonTirarDados()
     {
         btnTirar = new JButton("Tirar Dados");
-        btnTirar.setMinimumSize(new Dimension(200, 50));
-        panelDados.add(btnTirar);
+
+        btnTirar.setPreferredSize(new Dimension(250, 65));
+        panelPrincipal.add(btnTirar);
         btnTirar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (generala.getTurno() == 1) {
-                    generala.tirarDados();
-                }
-                //else aca
-                else {
-
-                }
-
+                generala.tirarDados();
                 actualizarImagenDados();
             }
         });
     }
 
+    /**
+     * recorre el arreglo de JlabelDado actualizando su imagen con el dado correspondiente al mismo indice
+     */
     private void actualizarImagenDados() {
         ArrayList<Dado> dados = generala.getDados();
         for (int i = 0; i < 5; i++) {
@@ -76,18 +80,23 @@ public class MenuGenerala extends JFrame {
     }
 
     public void animacionDados() {
-        //poner un gif unos segundos al tirar, en lo posible tambien sonido
+        //todo poner un gif unos segundos al tirar, en lo posible tambien sonido
     }
 
+
+    /**
+     * inicializa la tabla con las categorias y jugadores
+     * @param jugadores el arreglo de jugadores para la tabla
+     */
     private void iniciarTable(ArrayList<Jugador> jugadores) {
-        DefaultTableModel tablemodel = new DefaultTableModel(13, jugadores.size() + 1);
-        String[] categorias = {"Generala doble", "Generala", "Poker", "Full", "Escalera", "0", "1", "2", "3", "4", "5", "6"};
+        DefaultTableModel tablemodel = new DefaultTableModel(12, jugadores.size() + 1);
+        String[] categorias = {"Generala doble", "Generala", "Poker", "Full", "Escalera", "1", "2", "3", "4", "5", "6"};
         int i = 1;
         for (Jugador ju : jugadores) {
             tablemodel.setValueAt(ju.getNombre(), 0, i);
             i++;
         }
-        for (i = 1; i < 13; i++) {
+        for (i = 1; i < 12; i++) {
             tablemodel.setValueAt(categorias[i - 1], i, 0);
         }
         lTable.setModel(tablemodel);
