@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.util.Random;
 
 
-public class Dado {
+public class Dado implements Comparable<Dado>{
     private int numero;
 
     /**
@@ -74,5 +74,32 @@ public class Dado {
         return "Dado{" +
                 "numero=" + numero +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Dado o) {
+        if (this.getNumero()<o.getNumero())
+        {
+            return -1;
+        }
+        else
+        {
+            if (this.getNumero()==o.getNumero())
+            {
+                return 0;
+            }
+            else return 1;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        Dado dado = (Dado) o;
+        return numero == dado.numero;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
     }
 }

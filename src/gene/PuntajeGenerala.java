@@ -1,40 +1,45 @@
-package clases;
+package gene;
 
 import java.util.HashMap;
 
 /**
  * setters y getters de todas las categorias de la generala
  */
-public class PuntajeGenerala {
+public class PuntajeGenerala {                   //parece que no necesite tantos metodos D:
     private HashMap<String,String> tabla;
 
     public PuntajeGenerala() {
         tabla = new HashMap<String, String>();
     }
 
+    public void asignarCategoria(String categoria, String resultado)
+    {
+        tabla.put(categoria,resultado);
+    }
+
     public void asignarGeneralaDoble(String p)
     {
-        tabla.put("generala_doble",p);
+        tabla.put("Generala doble",p);
     }
 
     public void asignarGenerala(String p)
     {
-        tabla.put("generala",p);
+        tabla.put("Generala",p);
     }
 
     public void asignarPoker(String p)
     {
-        tabla.put("poker",p);
+        tabla.put("Poker",p);
     }
 
     public void asignarFull(String p)
     {
-        tabla.put("full",p);
+        tabla.put("Full",p);
     }
 
     public void asignarEscalera(String p)
     {
-        tabla.put("escalera",p);
+        tabla.put("Escalera",p);
     }
 
     public void asignarUno(String p)
@@ -67,29 +72,34 @@ public class PuntajeGenerala {
         tabla.put("6",p);
     }
 
+    public String getCategoria(String str)
+    {
+        return tabla.get(str);
+    }
+
     public String getGeneralaDoble()
     {
-        return tabla.get("generala_doble");
+        return tabla.get("Generala doble");
     }
 
     public String getGenerala()
     {
-        return tabla.get("generala");
+        return tabla.get("Generala");
     }
 
     public String getPoker()
     {
-        return tabla.get("poker");
+        return tabla.get("Poker");
     }
 
     public String getFull()
     {
-        return tabla.get("full");
+        return tabla.get("Full");
     }
 
     public String getEscalera()
     {
-        return tabla.get("escalera");
+        return tabla.get("Escalera");
     }
 
     public String getUno()

@@ -1,6 +1,6 @@
 package gui;
 
-import clases.Generala;
+import gene.Generala;
 import clases.Jugador;
 
 import javax.swing.*;
@@ -37,6 +37,7 @@ public class MenuPrincipal extends JFrame {
         this.setContentPane(jPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
         jugadores = new ArrayList<>();
 
@@ -47,6 +48,7 @@ public class MenuPrincipal extends JFrame {
                 cargarListaDeJugadores();
                 Generala generala = new Generala(jugadores);
                 menuGenerala = new MenuGenerala(titulo, generala);
+                dispose();
             }
         });
         checkJugador3.addActionListener(new ActionListener() {

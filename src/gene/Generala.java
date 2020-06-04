@@ -1,6 +1,10 @@
-package clases;
+package gene;
+
+import clases.Juego;
+import clases.Jugador;
 
 import java.util.ArrayList;
+
 
 public class Generala extends Juego {
     /**
@@ -14,7 +18,7 @@ public class Generala extends Juego {
         tiradas=0;
     }
     public Generala(ArrayList<Jugador> jugadores) {
-        super(jugadores);
+        super(jugadores,5);
         tiradas=0;
     }
 
@@ -22,7 +26,7 @@ public class Generala extends Juego {
     /**
      * aumenta el numero de tiradas, si fue la tercera se reinicia a 0 y se pasa de turno al siguiente jugador
      */
-    private void aumentarTirada()
+    public void aumentarTirada()
     {
         tiradas++;
         if (tiradas>=3)
@@ -32,27 +36,6 @@ public class Generala extends Juego {
         }
     }
 
-
-    /**
-     * {@inheritDoc}
-     * y aumenta tiradas
-     */
-    @Override
-    public void tirarDados() {
-        super.tirarDados();
-        aumentarTirada();
-    }
-
-
-    /**
-     * {@inheritDoc}
-     * y aumenta tiradas
-     */
-    @Override
-    public void tirarDados(int a, int b, int c, int d, int e) {
-        super.tirarDados(a, b, c, d, e);
-        aumentarTirada();
-    }
 
     public int getTiradas() {
         return tiradas;

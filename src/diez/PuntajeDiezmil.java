@@ -1,4 +1,4 @@
-package clases;
+package diez;
 
 public class PuntajeDiezmil {
 }

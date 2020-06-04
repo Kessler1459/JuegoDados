@@ -11,14 +11,14 @@ public abstract class Juego {
     public Juego() {
         dados=new ArrayList<Dado>();
         jugadores=new ArrayList<>();
-        inicializarDados();
+        inicializarDados(6);
         turno=1;
     }
 
-    public Juego(ArrayList<Jugador> jugadores) {
+    public Juego(ArrayList<Jugador> jugadores,int cantDados) {
         this.jugadores = jugadores;
         dados=new ArrayList<Dado>();
-        inicializarDados();
+        inicializarDados(cantDados);
         turno=1;
     }
 
@@ -26,9 +26,9 @@ public abstract class Juego {
     /**
      * instancia el arreglo de 5 dados que inician en 0
      */
-    private void inicializarDados()
+    private void inicializarDados(int cantDados)
     {
-        for (int i=0;i<5;i++)
+        for (int i=0;i<cantDados;i++)
         {
             dados.add(new Dado());
         }
@@ -52,6 +52,18 @@ public abstract class Juego {
     public void tirarDados(int a,int b, int c, int d, int e)
     {
         int arr[]=new int[]{a,b,c,d,e};
+        for (int i=0;i<5;i++)
+        {
+            if (arr[i]!=0)
+            {
+                dados.set(i,dados.get(i).tirarDado());
+            }
+        }
+    }
+
+    public void tirarDados(int a,int b, int c, int d, int e,int f)
+    {
+        int arr[]=new int[]{a,b,c,d,e,f};
         for (int i=0;i<6;i++)
         {
             if (arr[i]!=0)
@@ -88,9 +100,8 @@ public abstract class Juego {
     }
 
     public void setDados(ArrayList<Dado> dados) {
-        dados = dados;
+        this.dados = dados;
     }
-
 
     public int getTurno() {
         return turno;
