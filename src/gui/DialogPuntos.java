@@ -26,6 +26,7 @@ public class DialogPuntos extends JDialog {
     public DialogPuntos(Generala generala) {            //todo ver lo de cambiar de ventana
         botonesParaPuntuar =new ArrayList<JButton>();
         botonesParaTachar = new ArrayList<JButton>();
+        categoriaSeleccionada="";
         this.setResizable(false);
         this.setContentPane(contentPane);
         contentPane.setBackground(new Color(0x094100));
@@ -36,10 +37,9 @@ public class DialogPuntos extends JDialog {
         this.setLocation(1550,220);
         generarOpciones(generala);
         agregarBotones();
+        agregarBotonSeguirTirando(generala);
         setVisible(true);
-
     }
-
 
 
     /**
@@ -126,6 +126,27 @@ public class DialogPuntos extends JDialog {
         for (JButton btParaTachar: botonesParaTachar)
         {
             contentPane.add(btParaTachar);
+        }
+    }
+
+    /**
+     * aumenta el numero de tiradas y permite volver a tirar hasta 2 veces mas
+     */
+    private void agregarBotonSeguirTirando(Generala gen)
+    {
+        if (gen.getTiradas()!=2)
+        {
+            JButton btn=new JButton("Seguir tirando");
+            btn.setMinimumSize(new Dimension(250,30));
+            btn.setMaximumSize(new Dimension(250,30));
+            btn.setPreferredSize(new Dimension(250,30));
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose();                      //de no querer anotar, cerramos el dialogo para que siga tirando
+                }
+            });
+            contentPane.add(btn);
         }
     }
 

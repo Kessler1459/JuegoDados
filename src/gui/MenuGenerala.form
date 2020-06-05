@@ -43,7 +43,7 @@
               <cellSelectionEnabled value="false"/>
               <columnSelectionAllowed value="false"/>
               <fillsViewportHeight value="false"/>
-              <font size="16"/>
+              <font name="Arial Black" size="16"/>
               <foreground color="-16777216"/>
               <gridColor color="-16777216"/>
               <maximumSize width="605" height="465"/>

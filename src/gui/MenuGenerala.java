@@ -19,6 +19,7 @@ public class MenuGenerala extends JFrame {
 
     private Generala generala;
     private DialogPuntos dialogo;
+    private JLabel jlabelTurno;
     private JPanel panelPrincipal;
     private JButton btnTirar;
     private JLabelDado[] labelDado;
@@ -37,6 +38,8 @@ public class MenuGenerala extends JFrame {
         this.setVisible(true);
         iniciarLabelsDado();
         iniciarBotonTirarDados();
+        iniciarJLabelTurno();
+        actualizarJLabelTurno();
         iniciarTable(generala.getJugadores());
 
 
@@ -63,7 +66,7 @@ public class MenuGenerala extends JFrame {
     private void iniciarBotonTirarDados()
     {
         btnTirar = new JButton("Tirar Dados");
-
+        btnTirar.setFont(new Font("Arial Black",Font.PLAIN,16));
         btnTirar.setPreferredSize(new Dimension(250, 65));
         panelPrincipal.add(btnTirar);
         btnTirar.addActionListener(new ActionListener() {
@@ -73,11 +76,39 @@ public class MenuGenerala extends JFrame {
                 generala.tirarDados();
                 actualizarImagenDados();
                 dialogo=new DialogPuntos(generala);
-                anotarEnTabla(dialogo.getCategoriaSeleccionada(),jugadorDeTurno.getPuntosGen());
-                generala.aumentarTirada();
+                String categoriaSeleccionada=dialogo.getCategoriaSeleccionada();
+                if (!categoriaSeleccionada.equals(""))
+                {
+                    anotarEnTabla(categoriaSeleccionada,jugadorDeTurno.getPuntosGen());
+                    generala.pasarTurno();
+                    actualizarJLabelTurno();
+                }
+                else
+                    generala.aumentarTirada();
             }
         });
     }
+
+    /**
+     * label que indica el nombre del jugador que tiene el turno
+     */
+    private void iniciarJLabelTurno()
+    {
+        jlabelTurno=new JLabel();
+        jlabelTurno.setMinimumSize(new Dimension(200,40));
+        jlabelTurno.setFont(new Font("Arial Black",Font.PLAIN,16));
+        jlabelTurno.setForeground(new Color(0,0,0));
+        panelPrincipal.add(jlabelTurno);
+        jlabelTurno.setLabelFor(btnTirar);
+    }
+
+    private void actualizarJLabelTurno()
+    {
+        Jugador jugador=generala.getJugadores().get(generala.getTurno());
+        jlabelTurno.setText("Turno de: "+jugador.getNombre());
+    }
+
+
 
     /**
      * recorre el arreglo de JlabelDado actualizando su imagen con el dado correspondiente al mismo indice
@@ -126,7 +157,7 @@ public class MenuGenerala extends JFrame {
             String celda=lTable.getValueAt(i,0).toString();
             if (celda.equals(categoriaSeleccionada))
             {
-                lTable.setValueAt(puntajeDelJugador.getCategoria(categoriaSeleccionada),i,generala.getTurno());
+                lTable.setValueAt(puntajeDelJugador.getCategoria(categoriaSeleccionada),i,generala.getTurno()+1);
                 flag=true;
             }
             i++;

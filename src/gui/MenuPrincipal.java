@@ -32,7 +32,7 @@ public class MenuPrincipal extends JFrame {
      * frame inicial del juego
      * @param titulo titulo que tendra la ventana
      */
-    public MenuPrincipal(String titulo) {
+    public MenuPrincipal(String titulo) {             //todo si sobra tiempo, guardado y cargado de partida de ambos juegos en json
         super(titulo);
         this.setContentPane(jPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +44,7 @@ public class MenuPrincipal extends JFrame {
 
         generalaButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                    //todo preguntar excepcion campos vacios
+            public void actionPerformed(ActionEvent e) {
                 cargarListaDeJugadores();
                 Generala generala = new Generala(jugadores);
                 menuGenerala = new MenuGenerala(titulo, generala);

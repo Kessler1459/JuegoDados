@@ -24,18 +24,21 @@ public class Generala extends Juego {
 
 
     /**
-     * aumenta el numero de tiradas, si fue la tercera se reinicia a 0 y se pasa de turno al siguiente jugador
+     * aumenta el numero de tiradas
      */
     public void aumentarTirada()
     {
         tiradas++;
-        if (tiradas>=3)
-        {
-            tiradas=0;
-            pasarTurno();
-        }
     }
 
+    /**
+     * al pasar de turno reinicia el numero de tiradas tambien
+     */
+    @Override
+    public void pasarTurno() {
+        super.pasarTurno();
+        tiradas=0;
+    }
 
     public int getTiradas() {
         return tiradas;

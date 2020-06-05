@@ -12,14 +12,14 @@ public abstract class Juego {
         dados=new ArrayList<Dado>();
         jugadores=new ArrayList<>();
         inicializarDados(6);
-        turno=1;
+        turno=0;
     }
 
     public Juego(ArrayList<Jugador> jugadores,int cantDados) {
         this.jugadores = jugadores;
         dados=new ArrayList<Dado>();
         inicializarDados(cantDados);
-        turno=1;
+        turno=0;
     }
 
 
