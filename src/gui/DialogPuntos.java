@@ -54,7 +54,7 @@ public class DialogPuntos extends JDialog {
         int resultado;
         for (int i=0;i<11;i++)
         {
-            resultado= CalculadoraPuntosGenerala.calcularCategoria(generala.getDados(),categorias[i]);  //calcula cuantos puntos ganaria en cada categoria
+            resultado= CalculadoraPuntosGenerala.calcularCategoria(generala,categorias[i]);  //calcula cuantos puntos ganaria en cada categoria
             if (puntos.getCategoria(categorias[i])==null)  //si la categoria buscada no se encuentra ya anotada
             {
                 botonesParaTachar.add(crearBotonDeTachar(categorias[i],puntos));      //agrega los botones de tachar al arreglo
