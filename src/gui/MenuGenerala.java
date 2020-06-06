@@ -73,7 +73,12 @@ public class MenuGenerala extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Jugador jugadorDeTurno=generala.getJugadores().get(generala.getTurno());
-                generala.tirarDados();
+                if (generala.getTiradas()==0)          //en la primer tirada se deben tirar todos los dados
+                {
+                    generala.tirarDados();
+                }
+                else
+                    tirarDadosSelectivo();       //en las otras dos ya se puede elegir
                 actualizarImagenDados();
                 dialogo=new DialogPuntos(generala);
                 String categoriaSeleccionada=dialogo.getCategoriaSeleccionada();
@@ -85,6 +90,7 @@ public class MenuGenerala extends JFrame {
                 }
                 else
                     generala.aumentarTirada();
+                reactivarLabelsDado();
             }
         });
     }
@@ -109,6 +115,36 @@ public class MenuGenerala extends JFrame {
     }
 
 
+    /**
+     * tira dados pero teniendo en cuenta que dados estan seleccionados y cuales no
+     */
+    private void tirarDadosSelectivo()
+    {
+        int[] dados={0,0,0,0,0};
+        for (int i=0;i<5;i++)
+        {
+            dados[i]=verificarSeleccionDado(labelDado[i]);
+        }
+        generala.tirarDados(dados[0],dados[1],dados[2],dados[3],dados[4]);
+    }
+
+    private int verificarSeleccionDado(JLabelDado labelDado)
+    {
+        int a=0;
+        if (labelDado.isEnabled())
+        {
+            a=1;
+        }
+        return a;
+    }
+
+    private void reactivarLabelsDado()
+    {
+        for (JLabelDado d: labelDado)
+        {
+            d.setEnabled(true);
+        }
+    }
 
     /**
      * recorre el arreglo de JlabelDado actualizando su imagen con el dado correspondiente al mismo indice
