@@ -12,48 +12,54 @@ public class CalculadoraPuntosGenerala {
 
     /**
      * calcula  los puntos que vale la categoria pasada por String
-     * @param dados arraylist de dados en el que buscar
+     * @param generala para tener los dados y el numero de tiradas
      * @param categoria String con el nombre exacto de la categoria
      * @return los puntos correspondientes o un 0 de no ocurrir
      */
-    public static int calcularCategoria(ArrayList<Dado> dados,String categoria)
+    public static int calcularCategoria(Generala generala,String categoria)
     {
         int a=0;
+        int b=0;
+        ArrayList<Dado> dados=generala.getDados();
         ArrayList<Integer> frecuencias=calcularFrecuencia(dados);
         switch (categoria)
         {
-            case "generala":
+            case "Generala":
                 a=calcularGenerala(frecuencias);
                 break;
-            case "poker":
+            case "Poker":
                 a=calcularPoker(frecuencias);
                 break;
-            case "full":
+            case "Full":
                 a=calcularFull(frecuencias);
                 break;
-            case "escalera":
+            case "Escalera":
                 a=calcularEscalera(dados);
                 break;
             case "1":
-                a=calcularNumero(dados,1);
+                b=calcularNumero(dados,1);
                 break;
             case "2":
-                a=calcularNumero(dados,2);
+                b=calcularNumero(dados,2);
                 break;
             case "3":
-                a=calcularNumero(dados,3);
+                b=calcularNumero(dados,3);
                 break;
             case "4":
-                a=calcularNumero(dados,4);
+                b=calcularNumero(dados,4);
                 break;
             case "5":
-                a=calcularNumero(dados,5);
+                b=calcularNumero(dados,5);
                 break;
             case "6":
-                a=calcularNumero(dados,6);
+                b=calcularNumero(dados,6);
                 break;
         }
-        return a;
+        if (a>0 && generala.getTiradas()==0)          //si sale servida se suman 5 puntos mas
+        {
+            a+=5;
+        }
+        return a+b;
     }
 
     private static int calcularGenerala(ArrayList<Integer> frec)
@@ -87,12 +93,16 @@ public class CalculadoraPuntosGenerala {
         return a;
     }
 
+    /**
+     * ordena los dados de menor a mayor y los compara con las dos posibilidades de escalera que tiene el juego
+     */
     private static int calcularEscalera(ArrayList<Dado> dados)
     {
         int a=0;
         ArrayList<Dado> aux=new ArrayList<>(dados);
         ArrayList<Dado> escalera=new ArrayList<>();
         ArrayList<Dado> escalera2=new ArrayList<>();
+        Collections.sort(aux);
         for (int i=1;i<6;i++)
         {
             escalera.add(new Dado(i));
