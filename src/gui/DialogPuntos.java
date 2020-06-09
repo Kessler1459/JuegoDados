@@ -27,18 +27,19 @@ public class DialogPuntos extends JDialog {
         botonesParaPuntuar =new ArrayList<JButton>();
         botonesParaTachar = new ArrayList<JButton>();
         categoriaSeleccionada="";
+        this.setUndecorated(true);
         this.setResizable(false);
         this.setContentPane(contentPane);
         contentPane.setBackground(new Color(0x094100));
-        this.setMinimumSize(new Dimension(250,626));
-        this.setMaximumSize(new Dimension(250,626)); //todo probar localizacion en pantalla mas chica y sacar la X
+        this.setMinimumSize(new Dimension(250,617));
+        this.setMaximumSize(new Dimension(250,617)); //todo probar localizacion en pantalla mas chica y sacar la X
         this.setModal(true);
         this.pack();
-        this.setLocation(1550,220);
+        this.setLocation(1550,216);
         generarOpciones(generala);
         agregarBotones();
         agregarBotonSeguirTirando(generala);
-        setVisible(true);
+        this.setVisible(true);
     }
 
 

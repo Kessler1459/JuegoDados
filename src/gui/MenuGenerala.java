@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+
 /**
  * frame principal de la Generala
  */
@@ -41,9 +42,8 @@ public class MenuGenerala extends JFrame {
         iniciarJLabelTurno();
         actualizarJLabelTurno();
         iniciarTable(generala.getJugadores());
-
-
     }
+
 
     /**
      * inicializa el arreglo de JlabelDado, les setea una imagen inicial y lo agrega al panel de dados
@@ -73,24 +73,35 @@ public class MenuGenerala extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Jugador jugadorDeTurno=generala.getJugadores().get(generala.getTurno());
-                if (generala.getTiradas()==0)          //en la primer tirada se deben tirar todos los dados
+                if (generala.getTiradas()==0)                                     //en la primer tirada se deben tirar todos los dados
                 {
                     generala.tirarDados();
                 }
                 else
-                    tirarDadosSelectivo();       //en las otras dos ya se puede elegir
-                actualizarImagenDados();
+                {
+                    tirarDadosSelectivo();                                                //en las otras dos ya se puede elegir
+                }
+                actualizarImagenDados();                                     //cambia la imagen a la de los dados actuales
                 dialogo=new DialogPuntos(generala);
-                String categoriaSeleccionada=dialogo.getCategoriaSeleccionada();
-                if (!categoriaSeleccionada.equals(""))
+                String categoriaSeleccionada=dialogo.getCategoriaSeleccionada();                 //guarda la categoria del boton usado
+                if (!categoriaSeleccionada.equals(""))                                      //si fue seleccionada una categoria, se anota y se pasa de turno
                 {
                     anotarEnTabla(categoriaSeleccionada,jugadorDeTurno.getPuntosGen());
                     generala.pasarTurno();
-                    actualizarJLabelTurno();
+                    if (generala.comprobarFinalDePartida())                                 //si la partida llego al final se muestra el dialogo con los resultados finales
+                    {
+                        dialogoResultadosFinales();
+                    }
+                    else
+                    {
+                        actualizarJLabelTurno();
+                    }
                 }
-                else
+                else                                                                        //si se decide seguir tirando se aumenta el numero de tirada
+                {
                     generala.aumentarTirada();
-                reactivarLabelsDado();
+                }
+                reactivarLabelsDado();                                                      //resetea la seleccion de los dados
             }
         });
     }
@@ -103,7 +114,7 @@ public class MenuGenerala extends JFrame {
         jlabelTurno=new JLabel();
         jlabelTurno.setMinimumSize(new Dimension(200,40));
         jlabelTurno.setFont(new Font("Arial Black",Font.PLAIN,16));
-        jlabelTurno.setForeground(new Color(0,0,0));
+        jlabelTurno.setForeground(Color.BLACK);
         panelPrincipal.add(jlabelTurno);
         jlabelTurno.setLabelFor(btnTirar);
     }
@@ -128,6 +139,10 @@ public class MenuGenerala extends JFrame {
         generala.tirarDados(dados[0],dados[1],dados[2],dados[3],dados[4]);
     }
 
+    /**
+     * comprueba si el label esta seleccionado o no
+     * @return 1 o 0 segun lo este
+     */
     private int verificarSeleccionDado(JLabelDado labelDado)
     {
         int a=0;
@@ -138,6 +153,9 @@ public class MenuGenerala extends JFrame {
         return a;
     }
 
+    /**
+     * vuelve a activar tod0 el arreglo de labels
+     */
     private void reactivarLabelsDado()
     {
         for (JLabelDado d: labelDado)
@@ -156,8 +174,47 @@ public class MenuGenerala extends JFrame {
         }
     }
 
-    private void animacionDados() {
-        //todo poner un gif unos segundos al tirar, en lo posible tambien sonido
+
+    /**
+     * suma todos los puntajes de los jugadores y muestra el ganador en un dialog
+     */
+    private void dialogoResultadosFinales()
+    {
+        JDialog dialogo=new JDialog();
+        dialogo.setTitle("Resultados");
+        JPanel panelDialogo=new JPanel(new GridLayout(2,0));
+        JPanel panelLabels=new JPanel((new FlowLayout(FlowLayout.CENTER,40,40)));
+        JPanel panelBoton=new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelLabels.setBackground(new Color(9, 65,0));
+        panelBoton.setBackground(new Color(9, 65,0));
+        panelDialogo.add(panelLabels);
+        panelDialogo.add(panelBoton);
+        dialogo.setContentPane(panelDialogo);
+        dialogo.setResizable(false);
+        int i=0;
+        for (Jugador ju: generala.getJugadores())
+        {
+            JLabel label=new JLabel(ju.getNombre()+": "+ju.getPuntosGen().sumarPuntajeTotal());
+            label.setFont(new Font("Arial Black",Font.PLAIN,25));
+            label.setForeground(Color.BLACK);
+            label.setVisible(true);
+            panelLabels.add(label);
+            i++;
+        }
+        JButton btn=new JButton("Aceptar");
+        btn.setFont(new Font("Arial Black",Font.PLAIN,25));
+        btn.setPreferredSize(new Dimension(150,60));
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                dialogo.dispose();
+            }
+        });
+        panelBoton.add(btn);
+        dialogo.pack();
+        dialogo.setLocationRelativeTo(null);
+        dialogo.setVisible(true);
     }
 
 
@@ -177,6 +234,8 @@ public class MenuGenerala extends JFrame {
             tablemodel.setValueAt(categorias[i], i, 0);
         }
         lTable.setModel(tablemodel);
+        lTable.setDefaultEditor(Object.class,null);
+        lTable.setFocusable(false);
     }
 
     /**
