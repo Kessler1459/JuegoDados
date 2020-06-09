@@ -1,6 +1,8 @@
 package gene;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * setters y getters de todas las categorias de la generala
@@ -130,5 +132,20 @@ public class PuntajeGenerala {                   //parece que no necesite tantos
     public String getSeis()
     {
         return tabla.get("6");
+    }
+
+    public int sumarPuntajeTotal()
+    {
+        int total=0;
+        Iterator iterator=tabla.entrySet().iterator();
+        while (iterator.hasNext())
+        {
+            Map.Entry entrada= (Map.Entry) iterator.next();
+            if (!entrada.getValue().toString().equals("X"))
+            {
+                total+=Integer.parseInt(entrada.getValue().toString());
+            }
+        }
+        return total;
     }
 }

@@ -24,6 +24,9 @@ public class CalculadoraPuntosGenerala {
         ArrayList<Integer> frecuencias=calcularFrecuencia(dados);
         switch (categoria)
         {
+            case "Generala doble":
+                a=calcularGeneralaDoble(frecuencias,generala.getJugadores().get(generala.getTurno()).getPuntosGen());
+                break;
             case "Generala":
                 a=calcularGenerala(frecuencias);
                 break;
@@ -60,6 +63,16 @@ public class CalculadoraPuntosGenerala {
             a+=5;
         }
         return a+b;
+    }
+
+    private static int calcularGeneralaDoble(ArrayList<Integer> frec,PuntajeGenerala puntos)
+    {
+        int a=0;
+        if (calcularGenerala(frec)>0 && puntos.getGenerala()!=null)
+        {
+            a=100;
+        }
+        return a;
     }
 
     private static int calcularGenerala(ArrayList<Integer> frec)

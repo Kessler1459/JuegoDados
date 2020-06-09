@@ -12,13 +12,19 @@ public class Generala extends Juego {
      */
     private int tiradas;
 
+    /**
+     * numero de turnos totales que lleva la partida
+     */
+    private int duracionDePartida;
 
     public Generala() {
         super();
         tiradas=0;
+        duracionDePartida=0;
     }
     public Generala(ArrayList<Jugador> jugadores) {
         super(jugadores,5);
+        duracionDePartida=0;
         tiradas=0;
     }
 
@@ -37,10 +43,28 @@ public class Generala extends Juego {
     @Override
     public void pasarTurno() {
         super.pasarTurno();
+        duracionDePartida++;
         tiradas=0;
+    }
+
+    /**
+     * comprueba si la partida llego a su maximo de turnos jugados (11 * cantidad de jugadores)
+     */
+    public boolean comprobarFinalDePartida()
+    {
+        if (duracionDePartida==getJugadores().size()*11)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
     public int getTiradas() {
         return tiradas;
+    }
+
+    public int getDuracionDePartida() {
+        return duracionDePartida;
     }
 }
