@@ -11,7 +11,7 @@ public abstract class Juego {
     public Juego() {
         dados=new ArrayList<Dado>();
         jugadores=new ArrayList<>();
-        inicializarDados(6);
+        inicializarDados(5);
         turno=0;
     }
 
@@ -53,18 +53,6 @@ public abstract class Juego {
     {
         int arr[]=new int[]{a,b,c,d,e};
         for (int i=0;i<5;i++)
-        {
-            if (arr[i]!=0)
-            {
-                dados.set(i,dados.get(i).tirarDado());
-            }
-        }
-    }
-
-    public void tirarDados(int a,int b, int c, int d, int e,int f)
-    {
-        int arr[]=new int[]{a,b,c,d,e,f};
-        for (int i=0;i<6;i++)
         {
             if (arr[i]!=0)
             {
