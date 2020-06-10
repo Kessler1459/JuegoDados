@@ -1,6 +1,8 @@
 package clases;
 
 
+import Excepciones.ExcepcionImagenNoEncontrada;
+
 import javax.swing.*;
 import java.util.Random;
 
@@ -37,14 +39,20 @@ public class Dado implements Comparable<Dado>{
     private void setNumero(int num)
     {
         numero=num;
-        asignarImagen();
+        try {
+            asignarImagen();
+        }
+        catch (ExcepcionImagenNoEncontrada e)
+        {
+            System.out.println(e.toString());
+        }
     }
 
 
     /**
      * asigna la imagen del dado correspondiente
      */
-    private void asignarImagen()
+    private void asignarImagen() throws ExcepcionImagenNoEncontrada
     {
         imagen=new ImageIcon("Imagenes/"+getNumero()+".png");
     }
@@ -102,4 +110,6 @@ public class Dado implements Comparable<Dado>{
     public int hashCode() {
         return 0;
     }
+
+      //todo getter JSONObject
 }
