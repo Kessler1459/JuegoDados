@@ -37,6 +37,7 @@ public class MenuGenerala extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        iniciarBarraMenus();
         iniciarLabelsDado();
         iniciarBotonTirarDados();
         iniciarJLabelTurno();
@@ -257,5 +258,25 @@ public class MenuGenerala extends JFrame {
             }
             i++;
         }
+    }
+
+    /**
+     * crea menu de guardado de partida
+     */
+    private void iniciarBarraMenus()
+    {
+        JMenuBar menuBar=new JMenuBar();
+        JMenu menu=new JMenu("Partida");
+        JMenuItem item=new JMenuItem("Guardar partida");
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //todo aca iniciar MenuGenerala con generala cargada
+            }
+        });
+        menuBar.add(menu);
+        menu.add(item);
+        this.setJMenuBar(menuBar);
+        menuBar.setVisible(true);
     }
 }

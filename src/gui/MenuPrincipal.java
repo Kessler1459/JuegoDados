@@ -18,7 +18,7 @@ public class MenuPrincipal extends JFrame {
     private JCheckBox checkJugador3;
     private JTextField fieldJugador1;
     private JTextField fieldJugador2;
-    private JTextField fieldJugador3; //todo talvez hacer un arreglo 
+    private JTextField fieldJugador3;
     private JTextField fieldJugador4;
     private JButton diezMilButton;
     private JButton generalaButton;
@@ -32,30 +32,28 @@ public class MenuPrincipal extends JFrame {
      * frame inicial del juego
      * @param titulo titulo que tendra la ventana
      */
-    public MenuPrincipal(String titulo) {             //todo si sobra tiempo, guardado y cargado de partida de ambos juegos en json
+    public MenuPrincipal(String titulo) {
         super(titulo);
         this.setContentPane(jPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        iniciarBarraMenus();
         jugadores = new ArrayList<>();
-
-
         generalaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cargarListaDeJugadores();
                 Generala generala = new Generala(jugadores);
-                menuGenerala = new MenuGenerala(titulo, generala);
-                dispose();
+                menuGenerala = new MenuGenerala("Generala", generala);
             }
         });
         checkJugador3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (checkJugador3.isSelected()) {
-                    fieldJugador3.setEnabled(true); //todo modularizar esto, talvez otra clase check
+                    fieldJugador3.setEnabled(true);
                 } else fieldJugador3.setEnabled(false);
             }
         });
@@ -85,5 +83,31 @@ public class MenuPrincipal extends JFrame {
             jugadores.add(new Jugador(jugador3));
         if (fieldJugador4.isEnabled())
             jugadores.add(new Jugador(jugador4));
+    }
+
+
+    /**
+     * crea menu de carga de partida de ambos juegos
+     */
+    private void iniciarBarraMenus()
+    {
+        JMenuBar menuBar=new JMenuBar();
+        JMenu menu=new JMenu("Cargar partida");
+        JMenuItem itemDiezMil=new JMenuItem("Diez mil");
+        JMenuItem itemGenerala=new JMenuItem("Generala");
+        this.setJMenuBar(menuBar);
+        menuBar.add(menu);
+        menu.add(itemDiezMil);
+        menu.add(itemGenerala);
+        menuBar.setVisible(true);
+    }
+
+    /**
+     * reanuda una partida
+     * @param generala partida para cargar
+     */
+    private void cargarPartidaGenerala(Generala generala)
+    {
+        menuGenerala = new MenuGenerala("Generala", generala);
     }
 }

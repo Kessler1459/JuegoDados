@@ -23,7 +23,7 @@ public class DialogPuntos extends JDialog {
     /**constructor
      * @param generala para generar los botones correspondientes
      */
-    public DialogPuntos(Generala generala) {            //todo ver lo de cambiar de ventana
+    public DialogPuntos(Generala generala) {
         botonesParaPuntuar =new ArrayList<JButton>();
         botonesParaTachar = new ArrayList<JButton>();
         categoriaSeleccionada="";
