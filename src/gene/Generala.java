@@ -52,12 +52,7 @@ public class Generala extends Juego {
      */
     public boolean comprobarFinalDePartida()
     {
-        if (duracionDePartida==getJugadores().size()*11)
-        {
-            return true;
-        }
-        else
-            return false;
+        return duracionDePartida == getJugadores().size() * 11;
     }
 
     public int getTiradas() {
@@ -67,4 +62,6 @@ public class Generala extends Juego {
     public int getDuracionDePartida() {
         return duracionDePartida;
     }
+
+    //todo getter JSONObject
 }

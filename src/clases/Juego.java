@@ -51,7 +51,7 @@ public abstract class Juego {
      */
     public void tirarDados(int a,int b, int c, int d, int e)
     {
-        int arr[]=new int[]{a,b,c,d,e};
+        int[] arr =new int[]{a,b,c,d,e};
         for (int i=0;i<5;i++)
         {
             if (arr[i]!=0)

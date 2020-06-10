@@ -148,4 +148,6 @@ public class PuntajeGenerala {                   //parece que no necesite tantos
         }
         return total;
     }
+
+    //todo getter JSONObject recorrer con iterator
 }

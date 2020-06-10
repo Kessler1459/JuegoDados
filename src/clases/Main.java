@@ -4,10 +4,9 @@ import gui.MenuPrincipal;
 
 
 public class Main {
-    private static MenuPrincipal frame;
 
     public static void main(String[] args) {
-        frame = new MenuPrincipal("titulo");
+        MenuPrincipal frame = new MenuPrincipal("El Cubilete");
         frame.setVisible(true);
 
 

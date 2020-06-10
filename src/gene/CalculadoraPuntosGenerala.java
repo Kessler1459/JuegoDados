@@ -135,11 +135,10 @@ public class CalculadoraPuntosGenerala {
      */
     private static ArrayList<Integer> calcularFrecuencia(ArrayList<Dado> dados)
     {
-        ArrayList<Dado> aux=dados;
         ArrayList<Integer> num=new ArrayList<Integer>();
         for (int i=1;i<7;i++)
         {
-            num.add(Collections.frequency(aux,new Dado(i)));
+            num.add(Collections.frequency(dados,new Dado(i)));
         }
         return num;
     }
