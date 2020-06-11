@@ -4,6 +4,8 @@ import gene.Generala;
 import clases.Jugador;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -44,9 +46,11 @@ public class MenuPrincipal extends JFrame {
         generalaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cargarListaDeJugadores();
-                Generala generala = new Generala(jugadores);
-                menuGenerala = new MenuGenerala("Generala", generala);
+                if (cargarListaDeJugadores())
+                {
+                    Generala generala = new Generala(jugadores);
+                    menuGenerala = new MenuGenerala("Generala", generala);
+                }
             }
         });
         checkJugador3.addActionListener(new ActionListener() {
@@ -71,20 +75,55 @@ public class MenuPrincipal extends JFrame {
     /**
      * *llena el arraylist de jugadores con los textfield de cada jugador
      */
-    private void cargarListaDeJugadores()
+    private boolean cargarListaDeJugadores()
     {
-        String jugador1 = fieldJugador1.getText().trim();
-        String jugador2 = fieldJugador2.getText().trim();
-        String jugador3 = fieldJugador3.getText().trim();
-        String jugador4 = fieldJugador4.getText().trim();
-        jugadores.add(new Jugador(jugador1));
-        jugadores.add(new Jugador(jugador2));
-        if (fieldJugador3.isEnabled())
-            jugadores.add(new Jugador(jugador3));
-        if (fieldJugador4.isEnabled())
-            jugadores.add(new Jugador(jugador4));
+        boolean f=true;
+        if (comprobarFieldsVacios())
+        {
+            String jugador1 = fieldJugador1.getText().trim();
+            String jugador2 = fieldJugador2.getText().trim();
+            String jugador3 = fieldJugador3.getText().trim();
+            String jugador4 = fieldJugador4.getText().trim();
+            jugadores.add(new Jugador(jugador1));
+            jugadores.add(new Jugador(jugador2));
+            if (fieldJugador3.isEnabled())
+                jugadores.add(new Jugador(jugador3));
+            if (fieldJugador4.isEnabled())
+                jugadores.add(new Jugador(jugador4));
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Completa todos los nombres");
+            f=false;
+        }
+        return f;
     }
 
+    private boolean comprobarFieldsVacios()
+    {
+        boolean f=true;
+        if(fieldJugador1.getText().trim().equals(""))
+        {
+            f=false;
+            fieldJugador1.setBorder(new LineBorder(Color.RED));
+        }
+        if(fieldJugador2.getText().trim().equals(""))
+        {
+            f=false;
+            fieldJugador2.setBorder(new LineBorder(Color.RED));
+        }
+        if (fieldJugador3.isEnabled() && fieldJugador3.getText().trim().equals(""))
+        {
+            f=false;
+            fieldJugador3.setBorder(new LineBorder(Color.RED));
+        }
+        if (fieldJugador4.isEnabled() && fieldJugador4.getText().trim().equals(""))
+        {
+            f=false;
+            fieldJugador4.setBorder(new LineBorder(Color.RED));
+        }
+        return f;
+    }
 
     /**
      * crea menu de carga de partida de ambos juegos
