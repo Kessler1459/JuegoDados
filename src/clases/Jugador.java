@@ -3,7 +3,7 @@ package clases;
 import diez.PuntajeDiezmil;
 import gene.PuntajeGenerala;
 
-public class Jugador {
+public class Jugador implements Serializable {
     private String nombre;
     private PuntajeGenerala puntosGen;
     private PuntajeDiezmil puntosDiez;
