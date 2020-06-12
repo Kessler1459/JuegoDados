@@ -2,9 +2,9 @@ package clases;
 
 import java.util.ArrayList;
 
-public abstract class Juego {
+public abstract class Juego implements Serializable {
     private ArrayList<Jugador> jugadores;
-    private ArrayList<Dado> dados;
+    transient private ArrayList<Dado> dados;
     private int turno;
 
 
