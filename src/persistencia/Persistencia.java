@@ -1,31 +1,17 @@
 package persistencia;
 
 import java.io.*;
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 
 public class Persistencia {
 
 	private static String archi = "Partidas.dat";
 	
-	public static void guardar_partida(JSONArray aGuardar) {
-		
-		DataOutputStream save = null;
+	public static void guardar_partida(ArrayList<Juego> aGuardar) {
+		ObjectOutputStream save = null;
 		try {
-			save = new DataOutputStream(new FileOutputStream(archi));
-			for(int i = 0; i < aGuardar.length(); i++) {
-				try {
-					save.writeUTF(aGuardar.getJSONObject(i).toString());
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				save.flush();
-			}
+			save = new ObjectOutputStream(new FileOutputStream(archi));
+			save.writeObject(aGuardar);
 			save.close();
-			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			
@@ -35,20 +21,20 @@ public class Persistencia {
 		}
 	}
 	
-	public static ArrayList<String> cargar_partida() {
-		String aux;
-		ArrayList<String> datos = new ArrayList<String>();
-		DataInputStream log = null;
+	public static ArrayList<Juego> cargar_partida() {
+		ArrayList<Juego> aCargar = new ArrayList<Juego>();
+		ObjectInputStream log = null;
 		try {
-			log = new DataInputStream(new FileInputStream(archi));
-			while((aux = (String)log.readUTF()) != null) {
-				datos.add(aux);
-			}
+			log = new ObjectInputStream(new FileInputStream(archi));
+			aCargar = (ArrayList<Juego>)log.readObject();
+			log.close();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch(EOFException e){
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		return datos;
+		} 
+		return aCargar;
 	}
 }
