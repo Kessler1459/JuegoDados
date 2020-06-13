@@ -2,39 +2,57 @@ package persistencia;
 
 import java.io.*;
 
-public class Persistencia {
+import org.json.*;
 
-	private static String archi = "Partidas.dat";
+import clases.Juego;
+
+public class Persistencia {
 	
-	public static void guardar_partida(ArrayList<Juego> aGuardar) {
-		ObjectOutputStream save = null;
-		try {
-			save = new ObjectOutputStream(new FileOutputStream(archi));
-			save.writeObject(aGuardar);
-			save.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-			
-		}
-	}
+	//Lo hacemos poli
+	private static final String game = "Generala";
 	
-	public static ArrayList<Juego> cargar_partida() {
-		ArrayList<Juego> aCargar = new ArrayList<Juego>();
-		ObjectInputStream log = null;
-		try {
-			log = new ObjectInputStream(new FileInputStream(archi));
-			aCargar = (ArrayList<Juego>)log.readObject();
-			log.close();
-		}catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch(EOFException e){
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
-		return aCargar;
-	}
+	 public static void guardarPartida(Juego j)
+	    {
+	        JSONArray partidas=levantarArchivo();          //lee el array ya guardado en archivo
+	        partidas.put(To.ToJSON(j));                             //le agrega la partida nueva
+	        escribirArray(partidas);                        //vuelve a escribir todo
+	    }
+	 
+	    public static JSONArray levantarArchivo()
+	    {
+	        JSONArray array =null;
+	        try {
+	            DataInputStream data = new DataInputStream(new FileInputStream("archivo"+game+".dat"));
+	            try {
+					array = new JSONArray(data.readUTF());
+					data.close();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+	        }
+	        catch (FileNotFoundException e)
+	        {
+	            JSONArray nuevo=new JSONArray();                  //si el archivo no existe, se crea un array vacio, se lo escribe vacio, y se retorna
+	            escribirArray(nuevo);
+	            return nuevo;
+	        }
+	        catch (IOException e)
+	        {
+	            e.printStackTrace();
+	        }
+	        return array;                                       //sino, devuelve el array leido del archivo
+	    }
+	 
+	    public static void escribirArray(JSONArray ar)          
+	    {
+	        DataOutputStream data=null;
+	        try
+	        {
+	            data=new DataOutputStream(new FileOutputStream("archivoGenerala.dat"));
+	            data.writeUTF(ar.toString());
+	            data.close();
+	        }  catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
 }
