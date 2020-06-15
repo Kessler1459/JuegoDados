@@ -63,5 +63,4 @@ public class Generala extends Juego {
         return duracionDePartida;
     }
 
-    //todo getter JSONObject
 }

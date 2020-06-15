@@ -2,7 +2,7 @@ package clases;
 
 import java.util.ArrayList;
 
-public abstract class Juego implements Serializable {
+public abstract class Juego {
     private ArrayList<Jugador> jugadores;
     transient private ArrayList<Dado> dados;
     private int turno;
@@ -95,8 +95,18 @@ public abstract class Juego implements Serializable {
         return turno;
     }
 
+    public String listarJuegadores()
+    {
+        StringBuilder builder=new StringBuilder();
+        for (Jugador ju: jugadores)
+        {
+            builder.append(ju.toString()+", ");
+        }
+        return builder.toString();
+    }
+
     @Override
     public String toString() {
-        return "jugadores=" + jugadores + ",\ndados=" + dados;
+        return listarJuegadores() + "\t    turno:  " + turno;
     }
 }

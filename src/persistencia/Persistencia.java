@@ -5,7 +5,7 @@ import java.io.*;
 public class Persistencia {
 
 	private static String archi = "Partidas.dat";
-	
+	/*
 	public static void guardar_partida(ArrayList<Juego> aGuardar) {
 		ObjectOutputStream save = null;
 		try {
@@ -36,5 +36,5 @@ public class Persistencia {
 			e.printStackTrace();
 		} 
 		return aCargar;
-	}
+	}*/
 }

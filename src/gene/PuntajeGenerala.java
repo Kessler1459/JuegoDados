@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * setters y getters de todas las categorias de la generala
  */
-public class PuntajeGenerala implements Serializable {                   //parece que no necesite tantos metodos D:
+public class PuntajeGenerala {                   //parece que no necesite tantos metodos D:
     private HashMap<String,String> tabla;
 
     public PuntajeGenerala() {

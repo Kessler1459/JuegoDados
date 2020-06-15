@@ -3,7 +3,7 @@ package clases;
 import diez.PuntajeDiezmil;
 import gene.PuntajeGenerala;
 
-public class Jugador implements Serializable {
+public class Jugador  {
     private String nombre;
     private PuntajeGenerala puntosGen;
     private PuntajeDiezmil puntosDiez;
@@ -34,9 +34,7 @@ public class Jugador implements Serializable {
 
     @Override
     public String toString() {
-        return "Jugador{" +
-                "nombre='" + nombre + '\'' +
-                '}';
+        return nombre;
     }
 
     //todo getter JSONObject
