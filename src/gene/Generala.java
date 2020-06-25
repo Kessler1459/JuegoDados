@@ -28,10 +28,10 @@ public class Generala extends Juego {
         tiradas=0;
     }
     
-    public Jugador(String nombre, PuntajeGenerala puntosGen) {
-        this.nombre = nombre;
-        this.puntosGen=puntosGen;
-        //inicializar puntajeDiezmil aca
+    public Generala(int duracionDePartida, int tiradas, ArrayList<Jugador> jugadores, ArrayList<Dado> dados, int turno ) {
+    	super(jugadores, dados, turno);
+    	this.duracionDePartida = duracionDePartida;
+    	this.tiradas = tiradas;
     }
 
 
