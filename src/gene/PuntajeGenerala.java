@@ -13,6 +13,10 @@ public class PuntajeGenerala {                   //parece que no necesite tantos
     public PuntajeGenerala() {
         tabla = new HashMap<String, String>();
     }
+    
+    public PuntajeGenerala(HashMap<String, String> tabla) {
+    	this.tabla = tabla;
+    }
 
     public void asignarCategoria(String categoria, String resultado)
     {
