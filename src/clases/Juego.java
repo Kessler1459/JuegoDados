@@ -21,6 +21,12 @@ public abstract class Juego {
         inicializarDados(cantDados);
         turno=0;
     }
+    
+    public Juego(ArrayList<Jugador> jugadores, ArrayList<Dado> dados, int turno) {
+    	this.jugadores = jugadores;
+    	this.dados = dados;
+    	this.turno = turno;
+    }
 
 
     /**
