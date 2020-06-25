@@ -27,6 +27,12 @@ public class Generala extends Juego {
         duracionDePartida=0;
         tiradas=0;
     }
+    
+    public Jugador(String nombre, PuntajeGenerala puntosGen) {
+        this.nombre = nombre;
+        this.puntosGen=puntosGen;
+        //inicializar puntajeDiezmil aca
+    }
 
 
     /**
