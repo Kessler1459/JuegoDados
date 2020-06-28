@@ -17,13 +17,22 @@ public class Jugador  {
     public Jugador(String nombre) {
         this.nombre = nombre;
         puntosGen=new PuntajeGenerala();
-        //inicializar puntajeDiezmil aca
+        puntosDiez = new PuntajeDiezmil();
     }
     
     public Jugador(String nombre, PuntajeGenerala puntosGen) {
         this.nombre = nombre;
         this.puntosGen=puntosGen;
-        //inicializar puntajeDiezmil aca
+      puntosDiez = new PuntajeDiezmil();
+    }
+    public void setPuntosDiez(int ptos) {
+
+        puntosDiez.setPuntajeTotal(ptos);
+    }
+
+    public PuntajeDiezmil getPuntosDiez()
+    {
+        return puntosDiez;
     }
 
     public String getNombre() {

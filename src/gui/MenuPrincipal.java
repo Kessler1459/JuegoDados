@@ -1,5 +1,6 @@
 package gui;
 
+import diez.Diezmil;
 import gene.Generala;
 import clases.Jugador;
 
@@ -67,6 +68,16 @@ public class MenuPrincipal extends JFrame {
                 if (checkJugador4.isSelected()) {
                     fieldJugador4.setEnabled(true);
                 } else fieldJugador4.setEnabled(false);
+            }
+        });
+        diezMilButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(cargarListaDeJugadores())
+                {
+                    Diezmil game = new Diezmil(jugadores);
+                    MenuDiez menu10 = new MenuDiez("Diezmil",game);
+                }
             }
         });
     }

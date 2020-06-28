@@ -79,7 +79,12 @@ public abstract class Juego {
         }
         else turno=0;
     }
-
+    public String getTurnoJugador ()
+    {
+        int i = getTurno();
+        Jugador j = jugadores.get(i);
+        return j.getNombre();
+    }
 
     public ArrayList<Jugador> getJugadores() {
         return jugadores;

@@ -2,6 +2,7 @@ package gene;
 
 import clases.Juego;
 import clases.Jugador;
+import clases.Dado;
 
 import java.util.ArrayList;
 
