@@ -4,6 +4,8 @@ import clases.Dado;
 import gene.Generala;
 import clases.Jugador;
 import gene.PuntajeGenerala;
+import persistencia.Persistencia;
+import persistencia.To;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -33,7 +35,6 @@ public class MenuGenerala extends JFrame {
         this.generala = gene;
         this.setContentPane(panelPrincipal);
         this.pack();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -168,7 +169,7 @@ public class MenuGenerala extends JFrame {
     /**
      * recorre el arreglo de JlabelDado actualizando su imagen con el dado correspondiente al mismo indice
      */
-    private void actualizarImagenDados() {
+    public void actualizarImagenDados() {
         ArrayList<Dado> dados = generala.getDados();
         for (int i = 0; i < 5; i++) {
             labelDado[i].setIcon(dados.get(i).getImagen());
@@ -240,7 +241,7 @@ public class MenuGenerala extends JFrame {
     }
 
     /**
-     * escribe en la tabla un dato que se hubiera agregado a las puntuaciones del juegador
+     * escribe en la tabla un dato que se hubiera agregado a las puntuaciones del jugador
      * @param categoriaSeleccionada categoria en la que se asignara
      * @param puntajeDelJugador para leer la nueva puntuacion a ser anotada
      */
@@ -261,6 +262,23 @@ public class MenuGenerala extends JFrame {
     }
 
     /**
+     * escribe la tabla entera con los puntajes de los jugadores(se usa al reanudar partida)
+     */
+    public void cargarTabla()
+    {
+        ArrayList<Jugador> jugadores=generala.getJugadores();
+        for (int i=0; i<jugadores.size(); i++)
+        {
+            for (int j=1;j<12;j++)
+            {
+                String categoria=lTable.getValueAt(j,0).toString();
+                String punto=jugadores.get(i).getPuntosGen().getCategoria(categoria);
+                lTable.setValueAt(punto,j,i+1);
+            }
+        }
+    }
+
+    /**
      * crea menu de guardado de partida
      */
     private void iniciarBarraMenus()
@@ -271,7 +289,9 @@ public class MenuGenerala extends JFrame {
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo aca iniciar MenuGenerala con generala cargada
+                Persistencia.guardarPartida(generala);    //todo agregar boolean al guardar partida y mostrar un dialogo si no se pudo
+                //if aca
+                JOptionPane.showMessageDialog(null,"Partida guardada con exito.");
             }
         });
         menuBar.add(menu);
@@ -279,4 +299,5 @@ public class MenuGenerala extends JFrame {
         this.setJMenuBar(menuBar);
         menuBar.setVisible(true);
     }
+
 }

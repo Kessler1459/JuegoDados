@@ -9,9 +9,15 @@ import java.util.Map;
  */
 public class PuntajeGenerala {                   //parece que no necesite tantos metodos D:
     private HashMap<String,String> tabla;
+    private String [] categorias={"Generala doble","Generala", "Poker", "Full", "Escalera", "1", "2", "3", "4", "5", "6"};
 
     public PuntajeGenerala() {
         tabla = new HashMap<String, String>();
+        //inicializa todos los campos en ""
+        for (String s: categorias)
+        {
+            tabla.put(s,"");
+        }
     }
     
     public PuntajeGenerala(HashMap<String, String> tabla) {
@@ -25,57 +31,57 @@ public class PuntajeGenerala {                   //parece que no necesite tantos
 
     public void asignarGeneralaDoble(String p)
     {
-        tabla.put("Generala doble",p);
+        tabla.put(categorias[0],p);
     }
 
     public void asignarGenerala(String p)
     {
-        tabla.put("Generala",p);
+        tabla.put(categorias[1],p);
     }
 
     public void asignarPoker(String p)
     {
-        tabla.put("Poker",p);
+        tabla.put(categorias[2],p);
     }
 
     public void asignarFull(String p)
     {
-        tabla.put("Full",p);
+        tabla.put(categorias[3],p);
     }
 
     public void asignarEscalera(String p)
     {
-        tabla.put("Escalera",p);
+        tabla.put(categorias[4],p);
     }
 
     public void asignarUno(String p)
     {
-        tabla.put("1",p);
+        tabla.put(categorias[5],p);
     }
 
     public void asignarDos(String p)
     {
-        tabla.put("2",p);
+        tabla.put(categorias[6],p);
     }
 
     public void asignarTres(String p)
     {
-        tabla.put("3",p);
+        tabla.put(categorias[7],p);
     }
 
     public void asignarCuatro(String p)
     {
-        tabla.put("4",p);
+        tabla.put(categorias[8],p);
     }
 
     public void asignarCinco(String p)
     {
-        tabla.put("5",p);
+        tabla.put(categorias[9],p);
     }
 
     public void asignarSeis(String p)
     {
-        tabla.put("6",p);
+        tabla.put(categorias[10],p);
     }
 
     public String getCategoria(String str)
@@ -85,57 +91,57 @@ public class PuntajeGenerala {                   //parece que no necesite tantos
 
     public String getGeneralaDoble()
     {
-        return tabla.get("Generala doble");
+        return tabla.get(categorias[0]);
     }
 
     public String getGenerala()
     {
-        return tabla.get("Generala");
+        return tabla.get(categorias[1]);
     }
 
     public String getPoker()
     {
-        return tabla.get("Poker");
+        return tabla.get(categorias[2]);
     }
 
     public String getFull()
     {
-        return tabla.get("Full");
+        return tabla.get(categorias[3]);
     }
 
     public String getEscalera()
     {
-        return tabla.get("Escalera");
+        return tabla.get(categorias[4]);
     }
 
     public String getUno()
     {
-        return tabla.get("1");
+        return tabla.get(categorias[5]);
     }
 
     public String getDos()
     {
-        return tabla.get("2");
+        return tabla.get(categorias[6]);
     }
 
     public String getTres()
     {
-        return tabla.get("3");
+        return tabla.get(categorias[7]);
     }
 
     public String getCuatro()
     {
-        return tabla.get("4");
+        return tabla.get(categorias[8]);
     }
 
     public String getCinco()
     {
-        return tabla.get("5");
+        return tabla.get(categorias[9]);
     }
 
     public String getSeis()
     {
-        return tabla.get("6");
+        return tabla.get(categorias[10]);
     }
 
     public int sumarPuntajeTotal()
@@ -153,5 +159,19 @@ public class PuntajeGenerala {                   //parece que no necesite tantos
         return total;
     }
 
-    //todo getter JSONObject recorrer con iterator
+    public String listar()
+    {
+        StringBuilder bui=new StringBuilder();
+        bui.append("{");
+        for (int i=0;i<categorias.length;i++)
+        {
+            if (i!=0)
+            {
+                bui.append(",");
+            }
+            bui.append("\""+categorias[i]+"\":"+"\""+getCategoria(categorias[i])+"\"");
+        }
+        bui.append("}");
+        return bui.toString();
+    }
 }

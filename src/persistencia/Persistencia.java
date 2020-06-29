@@ -1,20 +1,33 @@
 package persistencia;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 
+import gene.Generala;
 import org.json.*;
 
 import clases.Juego;
 
 public class Persistencia {
-	
-	//Lo hacemos poli
+
 	private static final String game = "Generala";
 	
 	 public static void guardarPartida(Juego j)
 	    {
 	        JSONArray partidas=levantarArchivo();          //lee el array ya guardado en archivo
-	        partidas.put(To.ToJSON(j));                            //le agrega la partida nueva
+			if (j instanceof Generala)						//le agrega la partida nueva
+			{
+				Generala ge=(Generala)j;
+				partidas.put(To.generalaToJSON(ge));
+			}
+	        else {
+	        	/*
+				partidas.put(To.generalaToJSON((Generala) j));  aca lo mismo pero para diezmil
+
+	        	 */
+			}
 	        escribirArray(partidas);                        //vuelve a escribir todo
 	    }
 	 
@@ -22,23 +35,18 @@ public class Persistencia {
 	    {
 	    	JSONArray array =null;
 	        try {
-	            	
-	        		DataInputStream data = new DataInputStream(new FileInputStream("archivo"+game+".dat"));
-
-					try {
-						array = new JSONArray(data.readUTF());
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-					data.close();
-
+	        	array = new JSONArray(new String(Files.readAllBytes(Paths.get("archivo"+game+".json"))));
 	        }
-	        catch (FileNotFoundException e)
-	        {
-	        	JSONArray nuevo=new JSONArray();                  //si el archivo no existe, se crea un array vacio, se lo escribe vacio, y se retorna
-	            escribirArray(nuevo);
-	            return nuevo;
-	        }
+	        catch (EOFException e)
+			{
+				System.out.println("fin de archivo");
+			}
+	        catch (NoSuchFileException e) 							//si el archivo no existe, se crea un array vacio, se lo escribe vacio, y se retorna
+			{
+				JSONArray nuevo=new JSONArray();
+				escribirArray(nuevo);
+				return nuevo;
+			}
 	        catch (IOException e)
 	        {
 	            e.printStackTrace();
@@ -48,14 +56,15 @@ public class Persistencia {
 	 
 	    public static void escribirArray(JSONArray ar)          
 	    {
-	        DataOutputStream data=null;
-	    	   
 	        try
 	        {
-	            data=new DataOutputStream(new FileOutputStream("archivoGenerala.dat"));
-	            data.writeUTF(ar.toString());
-	            data.close();
-	        }  catch (IOException e) {
+				FileWriter file = new FileWriter("archivo"+game+".json");
+				file.write(ar.toString());
+				file.flush();
+				file.close();
+	        }
+	        catch (IOException e)
+			{
 	            e.printStackTrace();
 	        }
 	    }

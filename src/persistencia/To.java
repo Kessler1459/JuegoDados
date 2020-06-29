@@ -1,11 +1,10 @@
 package persistencia;
 
 import java.util.*;
-
 import org.json.*;
-
 import clases.*;
 import gene.*;
+
 
 public class To {
 	
@@ -14,23 +13,53 @@ public class To {
 	 * @param juego (Puede ser tanto Generala como Diezmil)
 	 * @return JSONObject
 	 */
-	public static JSONObject ToJSON(Juego j) {
-		JSONObject Jo = new JSONObject(j);
-		System.out.println(Jo.toString());
+	public static JSONObject diezMilToJSON(Juego juego) {
+		JSONObject Jo = new JSONObject(juego);
 		return Jo;
 	}
 
 	/**
+	 * transforma generala a JSONObject
+	 * @param ge generala a convertir
+	 * @return objecto json de generala completa
+	 */
+	public static JSONObject generalaToJSON(Generala ge)
+	{
+		JSONObject generala = new JSONObject(ge);
+		JSONArray jugadores=generala.getJSONArray("jugadores");
+		JSONObject jugador;
+		JSONObject puntos;
+		for (int i=0;i<ge.getJugadores().size();i++)
+		{
+			jugador=jugadores.getJSONObject(i);
+			puntos=new JSONObject(ge.getJugadores().get(i).getPuntosGen().listar());
+			jugador.put("puntosGen",puntos);
+			jugadores.put(i,jugador);
+		}
+		generala.put("jugadores",jugadores);
+		return generala;
+	}
+
+	public  static  JSONArray arrayListToJSON(ArrayList <Generala> list)
+	{
+		JSONArray json=new JSONArray();
+		for (Generala juego: list)
+		{
+			json.put(generalaToJSON(juego));
+		}
+		return json;
+	}
+
+	/**
 	 * Transforma un JSONArray en un ArrayList de tipo generala
-	 * @param JSONArray
+	 * @param leido array cargado
 	 * @return ArrayList<Generala>
 	 */
-	
     public static ArrayList<Generala> toArrayListG(JSONArray leido){
-    	ArrayList<Generala> arregloGen = new ArrayList<Generala>();
+    	ArrayList<Generala> arregloGen = new ArrayList<>();
     	int i = 0;
-		
-		while(i < leido.length()) {
+
+		while(i < leido.length()) {      //todo ver este try..
 				try {
 					JSONObject Oj = leido.getJSONObject(i);
 					Generala juego = toGenerala(Oj);
@@ -39,18 +68,17 @@ public class To {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-
 		}
 		return arregloGen;
     }
     
     /**
      * Transforma un JSONObject a un Objeto Generala
-     * @param JSONObject
+     * @param Oj JSONObject de generala
      * @return Generala
      * @throws JSONException 
      */
-    public static Generala toGenerala(JSONObject Oj) throws JSONException {
+    public static Generala toGenerala(JSONObject Oj) {
     	int duracionDePartida = Oj.getInt("duracionDePartida");
 		int tiradas = Oj.getInt("tiradas");
 		ArrayList<Jugador> Aj = toArrayListJg(Oj);
@@ -66,7 +94,7 @@ public class To {
      * @return ArrayList Jugadores
      * @throws JSONException
      */
-    public static ArrayList<Jugador> toArrayListJg(JSONObject Oj) throws JSONException{
+    public static ArrayList<Jugador> toArrayListJg(JSONObject Oj) {
 		ArrayList<Jugador> Aj = new ArrayList<Jugador>();
 		for( int k=0; k < Oj.getJSONArray("jugadores").length(); k++){
 			PuntajeGenerala puntos = new PuntajeGenerala(toHashMapPg(Oj, k));		
@@ -77,30 +105,42 @@ public class To {
     
     /**
      * Devuelve un HashMap de los puntos de la generala desde JSON
-     * @param Oj
-     * @param posicion
+     * @param Oj  JSONObject de PuntajeGenerala
+     * @param pos
      * @return HashMap tabla
      * @throws JSONException
      */
-    public static HashMap<String, String> toHashMapPg(JSONObject Oj, int pos) throws JSONException{
+    public static HashMap<String, String> toHashMapPg(JSONObject Oj, int pos){
 		HashMap<String, String> tabla = new HashMap<String, String>();
-		
 		JSONObject OjTabla =  Oj.getJSONArray("jugadores").getJSONObject(pos).getJSONObject("puntosGen");
-		
-		tabla.put("GeneralaDoble", OjTabla.getString("generalaDoble"));
-		tabla.put("Generala", OjTabla.getString("generala"));
-		tabla.put("Poker", OjTabla.getString("poker"));
-		tabla.put("Full", OjTabla.getString("full"));
-		tabla.put("Escalera", OjTabla.getString("escalera"));
-		tabla.put("Uno", OjTabla.getString("uno"));
-		tabla.put("Dos", OjTabla.getString("dos"));
-		tabla.put("Tres", OjTabla.getString("tres"));
-		tabla.put("Cuatro", OjTabla.getString("cuatro"));
-		tabla.put("Cinco", OjTabla.getString("cinco"));
-		tabla.put("Seis", OjTabla.getString("seis"));
-
+		tabla.put("Generala doble", OjTabla.getString("Generala doble"));
+		tabla.put("Generala", OjTabla.getString("Generala"));
+		tabla.put("Poker", OjTabla.getString("Poker"));
+		tabla.put("Full", OjTabla.getString("Full"));
+		tabla.put("Escalera", OjTabla.getString("Escalera"));
+		tabla.put("1", OjTabla.getString("1"));
+		tabla.put("2", OjTabla.getString("2"));
+		tabla.put("3", OjTabla.getString("3"));
+		tabla.put("4", OjTabla.getString("4"));
+		tabla.put("5", OjTabla.getString("5"));
+		tabla.put("6", OjTabla.getString("6"));
 		return tabla;
-    }   
+    }
+
+	/**
+	 * Devuelve un ArrayList de dados desde JSON
+	 * @param Oj
+	 * @return ArrayList Dados
+	 * @throws JSONException
+	 */
+	public static ArrayList<Dado> toArrayListD(JSONObject Oj){
+		ArrayList<Dado> Ad = new ArrayList<Dado>();
+		for(int j=0; j < Oj.getJSONArray("dados").length(); j++) {
+			Ad.add(new Dado(Oj.getJSONArray("dados").getJSONObject(j).getInt("numero")));
+		}
+		return Ad;
+	}
+
     /* 
 	/**
 	 * Transforma un JSONArray en un ArrayList de tipo diezmil
@@ -150,40 +190,9 @@ public class To {
 		}
 		return Aj;
     }
+*/
 
-    public static HashMap<String, String> toHashMapPd(JSONObject Oj, int pos) throws JSONException{
-		HashMap<String, String> tabla = new HashMap<String, String>();
-		
-		JSONObject OjTabla =  Oj.getJSONArray("jugadores").getJSONObject(pos).getJSONObject("puntosDiez");
-		
-		tabla.put("GeneralaDoble", OjTabla.getString("generalaDoble"));
-		tabla.put("Generala", OjTabla.getString("generala"));
-		tabla.put("Poker", OjTabla.getString("poker"));
-		tabla.put("Full", OjTabla.getString("full"));
-		tabla.put("Escalera", OjTabla.getString("escalera"));
-		tabla.put("Uno", OjTabla.getString("uno"));
-		tabla.put("Dos", OjTabla.getString("dos"));
-		tabla.put("Tres", OjTabla.getString("tres"));
-		tabla.put("Cuatro", OjTabla.getString("cuatro"));
-		tabla.put("Cinco", OjTabla.getString("cinco"));
-		tabla.put("Seis", OjTabla.getString("seis"));
 
-		return tabla;
-    }
-    */
-    /**
-     * Devuelve un ArrayList de dados desde JSON
-     * @param Oj
-     * @return ArrayList Dados
-     * @throws JSONException
-     */
-    public static ArrayList<Dado> toArrayListD(JSONObject Oj) throws JSONException{
-		ArrayList<Dado> Ad = new ArrayList<Dado>();
-    	for(int j=0; j < Oj.getJSONArray("dados").length(); j++) {
-			Ad.add(new Dado(Oj.getJSONArray("dados").getJSONObject(j).getInt("numero")));
-		}
-		return Ad;
-    }
     
 
 }
