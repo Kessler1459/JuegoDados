@@ -11,8 +11,14 @@ import org.json.*;
 
 import clases.Juego;
 
+/**
+ * metodos de lectura y escritura de archivo de tipo JSON
+ */
 public class Persistencia {
 
+	/**
+	 * nombres que podra tomar el archivo
+	 */
 	private static final String[] game = {"DiezMil","Generala"};
 
     /**

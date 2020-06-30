@@ -279,5 +279,8 @@ public class Diezmil  extends Juego {
         return pos;
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString()+" tiradas=" + tiradas;
+    }
 }
