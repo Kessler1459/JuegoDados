@@ -164,7 +164,7 @@ public class MenuDiez extends JFrame{
     /**
      * actualiza los puntajes en la tabla de puntuacion recorriendo el arraylist de jugadores
      */
-    private void actualizarPuntajes ()
+    public void actualizarPuntajes ()
     {
         ArrayList<Jugador>players = game.getJugadores();
         for (int i = 0;i<players.size();i++)
@@ -238,7 +238,7 @@ public class MenuDiez extends JFrame{
     /**
      * Actualiza la imagen de los dados luego de que fueron lanzados
      */
-    private void actualizarImagenDados() {
+    public void actualizarImagenDados() {
         ArrayList<Dado> dados = game.getDados();
         for (int i = 0; i < 5; i++) {
             labelDado[i].setIcon(dados.get(i).getImagen());

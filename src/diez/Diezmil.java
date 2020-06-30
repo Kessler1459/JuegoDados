@@ -24,16 +24,25 @@ public class Diezmil  extends Juego {
         super(jugadores,5);
         continuar = false;
         tiradas=0;
-
     }
+
+    public Diezmil(boolean continuar, int tiradas, ArrayList<Jugador> jugadores,ArrayList<Dado> dados, int turno)
+    {
+        super(jugadores,dados,turno);
+        this.continuar=continuar;
+        this.tiradas=tiradas;
+    }
+
     public void reiniciarTiradas()
     {
         tiradas = 0;
     }
+
     public int getTiradas()
     {
         return tiradas;
     }
+
     public void aumentarTiradas()
     {
         tiradas++;

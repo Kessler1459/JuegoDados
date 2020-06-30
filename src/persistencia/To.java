@@ -1,6 +1,9 @@
 package persistencia;
 
 import java.util.*;
+
+import diez.Diezmil;
+import diez.PuntajeDiezmil;
 import org.json.*;
 import clases.*;
 import gene.*;
@@ -40,7 +43,12 @@ public class To {
 		return generala;
 	}
 
-	public  static  JSONArray arrayListToJSON(ArrayList <Generala> list)
+    /**
+     * carga el JSONArray con un arraylist de partidas de generala
+     * @param list lista de partidas para cargar al json
+     * @return JSONArray cargado
+     */
+	public static JSONArray generalaArrayListToJSON(ArrayList <Generala> list)
 	{
 		JSONArray json=new JSONArray();
 		for (Generala juego: list)
@@ -49,6 +57,21 @@ public class To {
 		}
 		return json;
 	}
+
+    /**
+     * carga el JSONArray con un arraylist de partidas de diezMil
+     * @param list lista de partidas para cargar al json
+     * @return JSONArray cargado
+     */
+    public static JSONArray diezMilArrayListToJSON(ArrayList <Diezmil> list)
+    {
+        JSONArray json=new JSONArray();
+        for (Diezmil juego: list)
+        {
+            json.put(diezMilToJSON(juego));
+        }
+        return json;
+    }
 
 	/**
 	 * Transforma un JSONArray en un ArrayList de tipo generala
@@ -81,7 +104,7 @@ public class To {
     public static Generala toGenerala(JSONObject Oj) {
     	int duracionDePartida = Oj.getInt("duracionDePartida");
 		int tiradas = Oj.getInt("tiradas");
-		ArrayList<Jugador> Aj = toArrayListJg(Oj);
+		ArrayList<Jugador> Aj = toArrayListJGenerala(Oj);
 		ArrayList<Dado> Ad = toArrayListD(Oj);
 		int turno = Oj.getInt("turno");
 		Generala gen = new Generala(duracionDePartida, tiradas, Aj, Ad, turno);
@@ -94,7 +117,7 @@ public class To {
      * @return ArrayList Jugadores
      * @throws JSONException
      */
-    public static ArrayList<Jugador> toArrayListJg(JSONObject Oj) {
+    public static ArrayList<Jugador> toArrayListJGenerala(JSONObject Oj) {
 		ArrayList<Jugador> Aj = new ArrayList<Jugador>();
 		for( int k=0; k < Oj.getJSONArray("jugadores").length(); k++){
 			PuntajeGenerala puntos = new PuntajeGenerala(toHashMapPg(Oj, k));		
@@ -141,21 +164,21 @@ public class To {
 		return Ad;
 	}
 
-    /* 
+
 	/**
 	 * Transforma un JSONArray en un ArrayList de tipo diezmil
-	 * @param JSONArray
-	 * @return ArrayList<diezmil>
-	 
+	 * @param leido JSONArray a convertir
+	 * @return ArrayList<diezmil> cargado con tod0 el json
+        */
 	
-    public static ArrayList<Diezmil> toArrayListD(JSONArray leido){
+    public static ArrayList<Diezmil> toArrayListDiezMil(JSONArray leido){
     	ArrayList<Diezmil> arregloDiez = new ArrayList<Diezmil>();
     	int i = 0;
 		
 		while(i < leido.length()) {
 				try {
 					JSONObject Oj = leido.getJSONObject(i);
-					Diezmil juego = toGenerala(Oj);
+					Diezmil juego = toDiezmil(Oj);
 					arregloDiez.add(juego);
 					i++;
 				} catch (JSONException e) {
@@ -165,34 +188,38 @@ public class To {
 		}
 		return arregloDiez;
     }
-    
+
+
     /**
      * Transforma un JSONObject a un Objeto Diezmil
-     * @param JSONObject
-     * @return Diezmil
-     * @throws JSONException 
-     
-    public static Diezmil toDiezmil(JSONObject Oj) throws JSONException {
-    	int duracionDePartida = Oj.getInt("duracionDePartida");
+     * @param Oj objeto para convertir
+     * @return Diezmil objeto DiezMil cargado
+     */
+    public static Diezmil toDiezmil(JSONObject Oj) {
+    	boolean continuar = Oj.getBoolean("continuar");
 		int tiradas = Oj.getInt("tiradas");
-		ArrayList<Jugador> Aj = toArrayListJd(Oj);
+		ArrayList<Jugador> Aj = toArrayListJDiezMil(Oj);
 		ArrayList<Dado> Ad = toArrayListD(Oj);
 		int turno = Oj.getInt("turno");
-		Diezmil diez = new Diezmil(duracionDePartida, tiradas, Aj, Ad, turno);
+		Diezmil diez = new Diezmil(continuar,tiradas,Aj,Ad,turno);
 		return diez;
     }
-    
-    public static ArrayList<Jugador> toArrayListJd(JSONObject Oj) throws JSONException{
-		ArrayList<Jugador> Aj = new ArrayList<Jugador>();
-		for( int k=0; k < Oj.getJSONArray("jugadores").length(); k++){
-			PuntajeGenerala puntos = new PuntajeDiezmil(toHashMapPg(Oj, k));		
-			Aj.add(new Jugador(Oj.getJSONArray("jugadores").getJSONObject(k).getString("nombre"), puntos));
+
+    public static ArrayList<Jugador> toArrayListJDiezMil(JSONObject Oj){
+		ArrayList<Jugador> arr = new ArrayList<Jugador>();
+		JSONArray jugadores=Oj.getJSONArray("jugadores");
+		Jugador jugador;
+		for( int k=0; k < jugadores.length(); k++)
+		{
+		    JSONObject ju=jugadores.getJSONObject(k);
+		    jugador=new Jugador(ju.getString("nombre"));
+			JSONObject punt=ju.getJSONObject("puntosDiez");
+		    PuntajeDiezmil puntos = new PuntajeDiezmil();
+			puntos.setPuntajeTiro((int)punt.get("puntajeTiro"));
+            puntos.setPuntajeTotal((int) punt.get("puntajeTotal"));
+			jugador.setPuntosDiez(puntos);
+			arr.add(k,jugador);
 		}
-		return Aj;
+		return arr;
     }
-*/
-
-
-    
-
 }

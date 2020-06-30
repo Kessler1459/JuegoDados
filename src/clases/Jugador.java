@@ -20,9 +20,10 @@ public class Jugador  {
         puntosDiez = new PuntajeDiezmil();
     }
 
-    public void setPuntosDiez(int ptos) {
+    public void setPuntosDiez(PuntajeDiezmil puntos) {
 
-        puntosDiez.setPuntajeTotal(ptos);
+        puntosDiez.setPuntajeTotal(puntos.getPuntajeTotal());
+        puntosDiez.setPuntajeTiro(puntos.getPuntajeTiro());
     }
 
     public PuntajeDiezmil getPuntosDiez()

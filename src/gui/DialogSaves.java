@@ -3,6 +3,7 @@ package gui;
 
 import clases.Juego;
 import clases.Jugador;
+import diez.Diezmil;
 import gene.Generala;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class DialogSaves <T extends Juego> extends JDialog {
     private DefaultListModel<T> modelo=new DefaultListModel<T>();
     private ArrayList<T> resultado;
 
-    public DialogSaves(ArrayList<T> juegos) {          //todo talvez agregar fechas
+    public DialogSaves(ArrayList<T> juegos) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -52,7 +53,7 @@ public class DialogSaves <T extends Juego> extends JDialog {
         });
         buttonOK.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {   //todo comprobar si selecciono algo
+            public void actionPerformed(ActionEvent e) {
                 Juego ju=list1.getSelectedValue();
                 if (ju==null)
                 {
@@ -69,7 +70,10 @@ public class DialogSaves <T extends Juego> extends JDialog {
                     }
                     else
                     {
-                        //todo aca lo mismo pero diezmil
+                        Diezmil dm=(Diezmil) ju;
+                        MenuDiez menuDiez=new MenuDiez("Diez mil",dm);
+                        menuDiez.actualizarImagenDados();
+                        menuDiez.actualizarPuntajes();
                     }
                     dispose();
                 }

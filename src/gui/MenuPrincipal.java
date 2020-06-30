@@ -161,7 +161,7 @@ public class MenuPrincipal extends JFrame {
                 JSONArray arrayModificado;
                 if (!resultado.isEmpty())         //recupera las partidas desde el dialogo(por si hubo eliminados) y lo vuelve a escribir
                 {
-                    arrayModificado= To.arrayListToJSON(resultado);
+                    arrayModificado= To.generalaArrayListToJSON(resultado);
                     Persistencia.escribirArray(arrayModificado,1);
                 }
                 else
@@ -174,8 +174,20 @@ public class MenuPrincipal extends JFrame {
         itemDiezMil.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //ArrayList<DiezMil> saves=cargarPartidaDiezMil();
-              //  DialogSaves<DiezMil> dialogo=new DialogSaves(saves);
+                ArrayList<Diezmil> saves=cargarPartidaDiezMil();
+                DialogSaves<Diezmil> dialogo=new DialogSaves(saves);
+                dialogo.setVisible(true);
+                ArrayList<Diezmil> resultado=dialogo.getResultado();
+                JSONArray arrayModificado;
+                if (!resultado.isEmpty())
+                {
+                    arrayModificado= To.diezMilArrayListToJSON(resultado);
+                    Persistencia.escribirArray(arrayModificado,0);
+                }
+                else {
+                    arrayModificado = new JSONArray();
+                    Persistencia.escribirArray(arrayModificado, 0);
+                }
             }
         });
         this.setJMenuBar(menuBar);
@@ -187,6 +199,7 @@ public class MenuPrincipal extends JFrame {
 
     /**
      * lee del archivo y genera un arraylist de generalas
+     * @return ArrayList de las partidas leidas
      */
     private ArrayList<Generala> cargarPartidaGenerala()
     {
@@ -194,5 +207,17 @@ public class MenuPrincipal extends JFrame {
         JSONArray jsonArray=Persistencia.levantarArchivo(1);
         savesGenerala=To.toArrayListG(jsonArray);
         return savesGenerala;
+    }
+
+    /**
+     * lee archivo y genera arraylist de diezMil
+     * @return ArrayList de las partidas leidas
+     */
+    private ArrayList<Diezmil> cargarPartidaDiezMil()
+    {
+        ArrayList<Diezmil> saves;
+        JSONArray jsonArray=Persistencia.levantarArchivo(0);
+        saves=To.toArrayListDiezMil(jsonArray);
+        return saves;
     }
 }
