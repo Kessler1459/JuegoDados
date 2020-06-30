@@ -21,7 +21,7 @@ public abstract class Juego {
         inicializarDados(cantDados);
         turno=0;
     }
-    
+
     public Juego(ArrayList<Jugador> jugadores, ArrayList<Dado> dados, int turno) {
     	this.jugadores = jugadores;
     	this.dados = dados;
@@ -79,12 +79,14 @@ public abstract class Juego {
         }
         else turno=0;
     }
+
     public String getTurnoJugador ()
     {
         int i = getTurno();
         Jugador j = jugadores.get(i);
         return j.getNombre();
     }
+
 
     public ArrayList<Jugador> getJugadores() {
         return jugadores;
@@ -106,7 +108,7 @@ public abstract class Juego {
         return turno;
     }
 
-    public String listarJuegadores()
+    public String listarJugadores()
     {
         StringBuilder builder=new StringBuilder();
         for (Jugador ju: jugadores)
@@ -118,6 +120,6 @@ public abstract class Juego {
 
     @Override
     public String toString() {
-        return listarJuegadores() + "\t    turno:  " + turno;
+        return listarJugadores() + "\t";
     }
 }

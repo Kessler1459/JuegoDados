@@ -11,7 +11,7 @@ public class Jugador  {
     public Jugador() {
         this.nombre = "";
         puntosGen=new PuntajeGenerala();
-        //inicializar puntajeDiezmil aca
+        puntosDiez = new PuntajeDiezmil();
     }
 
     public Jugador(String nombre) {
@@ -19,12 +19,7 @@ public class Jugador  {
         puntosGen=new PuntajeGenerala();
         puntosDiez = new PuntajeDiezmil();
     }
-    
-    public Jugador(String nombre, PuntajeGenerala puntosGen) {
-        this.nombre = nombre;
-        this.puntosGen=puntosGen;
-      puntosDiez = new PuntajeDiezmil();
-    }
+
     public void setPuntosDiez(int ptos) {
 
         puntosDiez.setPuntajeTotal(ptos);
@@ -33,6 +28,12 @@ public class Jugador  {
     public PuntajeDiezmil getPuntosDiez()
     {
         return puntosDiez;
+    }
+
+    public Jugador(String nombre, PuntajeGenerala puntosGen) {
+        this.nombre = nombre;
+        this.puntosGen=puntosGen;
+        //inicializar puntajeDiezmil aca
     }
 
     public String getNombre() {
@@ -52,5 +53,4 @@ public class Jugador  {
         return nombre;
     }
 
-    //todo getter JSONObject
 }

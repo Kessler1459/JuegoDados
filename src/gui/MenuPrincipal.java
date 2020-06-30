@@ -3,6 +3,9 @@ package gui;
 import diez.Diezmil;
 import gene.Generala;
 import clases.Jugador;
+import org.json.JSONArray;
+import persistencia.Persistencia;
+import persistencia.To;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -145,6 +148,36 @@ public class MenuPrincipal extends JFrame {
         JMenu menu=new JMenu("Cargar partida");
         JMenuItem itemDiezMil=new JMenuItem("Diez mil");
         JMenuItem itemGenerala=new JMenuItem("Generala");
+        /**
+         * botones que inician el dialogo con el arreglo de partidas sacado del archivo correspondiente
+         */
+        itemGenerala.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Generala> saves=cargarPartidaGenerala();
+                DialogSaves<Generala> dialogo=new DialogSaves(saves);
+                dialogo.setVisible(true);
+                ArrayList<Generala> resultado=dialogo.getResultado();
+                JSONArray arrayModificado;
+                if (!resultado.isEmpty())         //recupera las partidas desde el dialogo(por si hubo eliminados) y lo vuelve a escribir
+                {
+                    arrayModificado= To.arrayListToJSON(resultado);
+                    Persistencia.escribirArray(arrayModificado);
+                }
+                else
+                {
+                    arrayModificado=new JSONArray();
+                    Persistencia.escribirArray(arrayModificado);
+                }
+            }
+        });
+        itemDiezMil.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //ArrayList<DiezMil> saves=cargarPartidaDiezMil();
+              //  DialogSaves<DiezMil> dialogo=new DialogSaves(saves);
+            }
+        });
         this.setJMenuBar(menuBar);
         menuBar.add(menu);
         menu.add(itemDiezMil);
@@ -153,11 +186,13 @@ public class MenuPrincipal extends JFrame {
     }
 
     /**
-     * reanuda una partida
-     * @param generala partida para cargar
+     * lee del archivo y genera un arraylist de generalas
      */
-    private void cargarPartidaGenerala(Generala generala)
+    private ArrayList<Generala> cargarPartidaGenerala()
     {
-        menuGenerala = new MenuGenerala("Generala", generala);
+        ArrayList<Generala> savesGenerala;
+        JSONArray jsonArray=Persistencia.levantarArchivo();
+        savesGenerala=To.toArrayListG(jsonArray);
+        return savesGenerala;
     }
 }

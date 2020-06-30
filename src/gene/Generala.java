@@ -28,7 +28,7 @@ public class Generala extends Juego {
         duracionDePartida=0;
         tiradas=0;
     }
-    
+
     public Generala(int duracionDePartida, int tiradas, ArrayList<Jugador> jugadores, ArrayList<Dado> dados, int turno ) {
     	super(jugadores, dados, turno);
     	this.duracionDePartida = duracionDePartida;
@@ -70,4 +70,9 @@ public class Generala extends Juego {
         return duracionDePartida;
     }
 
+    @Override
+    public String toString() {
+        return  super.toString()+" Turno= " + duracionDePartida +
+                "  tiradas= " + tiradas ;
+    }
 }
