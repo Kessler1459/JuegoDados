@@ -5,6 +5,7 @@ import clases.Jugador;
 import diez.CalculadoraPuntosDiez;
 import diez.Diezmil;
 import diez.PuntajeDiezmil;
+import persistencia.Persistencia;
 
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
@@ -43,30 +44,24 @@ public class MenuDiez extends JFrame{
         this.game = game;
         this.setContentPane(PanelPrincipal);
         this.pack();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         iniciarBarraMenus();
         iniciarPuntajeEnJuego();
         iniciarLabelsDado();
-
         iniciarBotonTirarDados();
         iniciarBotonAnotarPuntaje();
         iniciarJLabelTurno();
         actualizarJLabelTurno();
-
         iniciarTablaPuntajes();
-
         actualizarPuntajes();
-
     }
 
     /**
      * Inicializa el boton para anotar puntaje y lo agrega al panel principal
      *
      */
-
     private void iniciarBotonAnotarPuntaje()
     {
         anotarPuntaje= new JButton();
@@ -95,7 +90,6 @@ public class MenuDiez extends JFrame{
                     actualizarPuntajeEnJuego();
                     actualizarBotonTirar();
                 }
-
             }
         });
     }
@@ -164,9 +158,7 @@ public class MenuDiez extends JFrame{
             punt[i].setForeground(Color.WHITE);
             punt[i].setEditable(false);
             panelPuntos.add(punt[i]);
-
         }
-
     }
 
     /**
@@ -215,7 +207,6 @@ public class MenuDiez extends JFrame{
         puntajeEnJuego.setEditable(false);
         puntajeEnJuego.setText("Puntaje en juego: " +j.getPuntosDiez().getPuntajeTiro());
         panelDados.add(puntajeEnJuego);
-
     }
 
     /**
@@ -241,7 +232,6 @@ public class MenuDiez extends JFrame{
         if (players.get(i).getPuntosDiez().getPuntajeTotal()>=10000)
         {
             JOptionPane.showMessageDialog(null,"FELICITACIONES "+players.get(i).getNombre()+" GANA EL JUEGO");
-
         }
     }
 
@@ -266,7 +256,6 @@ public class MenuDiez extends JFrame{
         jlabelTurno.setFont(new Font("Arial Black",Font.PLAIN,20));
         jlabelTurno.setForeground(Color.white);
         PanelPrincipal.add(jlabelTurno);
-
     }
 
     /**
@@ -282,7 +271,6 @@ public class MenuDiez extends JFrame{
         {
             botonTirar.setText("Seguir Tirando");
         }
-
     }
 
     /**
@@ -323,7 +311,6 @@ public class MenuDiez extends JFrame{
                     {
                         puntosJugadorTurno.setPuntajeTiro(CalculadoraPuntosDiez.calcularPuntajeTotal(game.getDados()));    //actualiza el puntaje del tiro con los puntos obtenidos
                     }
-
                 }
                 else
                 {
@@ -338,7 +325,6 @@ public class MenuDiez extends JFrame{
                     {
                         puntosJugadorTurno.setPuntajeTiro(CalculadoraPuntosDiez.calcularPuntajeTotal(nuevoTiro)); //agrega el puntaje obtenido al tiro
                     }
-
                 }
                 actualizarPuntajeEnJuego();
                 actualizarImagenDados();
@@ -381,7 +367,12 @@ public class MenuDiez extends JFrame{
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo aca iniciar MenuGenerala con generala cargada
+                if (Persistencia.guardarPartida(game))
+                {
+                    JOptionPane.showMessageDialog(null,"Partida guardada con exito.");
+                }
+                else
+                    JOptionPane.showMessageDialog(null,"Error al guardar la partida.");
             }
         });
         menuBar.add(menu);
@@ -389,5 +380,4 @@ public class MenuDiez extends JFrame{
         this.setJMenuBar(menuBar);
         menuBar.setVisible(true);
     }
-
 }

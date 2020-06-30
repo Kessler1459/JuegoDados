@@ -162,12 +162,12 @@ public class MenuPrincipal extends JFrame {
                 if (!resultado.isEmpty())         //recupera las partidas desde el dialogo(por si hubo eliminados) y lo vuelve a escribir
                 {
                     arrayModificado= To.arrayListToJSON(resultado);
-                    Persistencia.escribirArray(arrayModificado);
+                    Persistencia.escribirArray(arrayModificado,1);
                 }
                 else
                 {
                     arrayModificado=new JSONArray();
-                    Persistencia.escribirArray(arrayModificado);
+                    Persistencia.escribirArray(arrayModificado,1);
                 }
             }
         });
@@ -191,7 +191,7 @@ public class MenuPrincipal extends JFrame {
     private ArrayList<Generala> cargarPartidaGenerala()
     {
         ArrayList<Generala> savesGenerala;
-        JSONArray jsonArray=Persistencia.levantarArchivo();
+        JSONArray jsonArray=Persistencia.levantarArchivo(1);
         savesGenerala=To.toArrayListG(jsonArray);
         return savesGenerala;
     }

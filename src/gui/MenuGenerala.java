@@ -289,9 +289,12 @@ public class MenuGenerala extends JFrame {
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Persistencia.guardarPartida(generala);    //todo agregar boolean al guardar partida y mostrar un dialogo si no se pudo
-                //if aca
-                JOptionPane.showMessageDialog(null,"Partida guardada con exito.");
+                if (Persistencia.guardarPartida(generala))
+                {
+                    JOptionPane.showMessageDialog(null,"Partida guardada con exito.");
+                }
+                else
+                    JOptionPane.showMessageDialog(null,"Error al guardar la partida.");
             }
         });
         menuBar.add(menu);

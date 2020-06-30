@@ -1,3 +1,4 @@
 # Project exclude paths
 /out/
 .idea/inspectionProfiles/profiles_settings.xml
+*.json
