@@ -69,10 +69,16 @@ public class Dado implements Comparable<Dado>{
         return this;
     }
 
+    /**
+     * @return imagen correspondiente al numero de dado
+     */
     public ImageIcon getImagen() {
         return imagen;
     }
 
+    /**
+     * @return numero actual del dado
+     */
     public int getNumero() {
         return numero;
     }
@@ -110,6 +116,4 @@ public class Dado implements Comparable<Dado>{
     public int hashCode() {
         return 0;
     }
-
-      //todo getter JSONObject
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import Interfaces.MenuJuego;
 import clases.Dado;
 import clases.Jugador;
 import diez.CalculadoraPuntosDiez;
@@ -7,6 +8,7 @@ import diez.Diezmil;
 import diez.PuntajeDiezmil;
 import persistencia.Persistencia;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -14,13 +16,15 @@ import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Frame principal del DiezMil
  */
 
-public class MenuDiez extends JFrame{
+public class MenuDiez extends JFrame implements MenuJuego {
 
     private Diezmil game;
     private JPanel PanelPrincipal;
@@ -50,11 +54,10 @@ public class MenuDiez extends JFrame{
         iniciarBarraMenus();
         iniciarPuntajeEnJuego();
         iniciarLabelsDado();
-        iniciarBotonTirarDados();
-        iniciarBotonAnotarPuntaje();
+        iniciarBotones();
         iniciarJLabelTurno();
         actualizarJLabelTurno();
-        iniciarTablaPuntajes();
+        iniciarPuntajes();
         actualizarPuntajes();
     }
 
@@ -73,8 +76,6 @@ public class MenuDiez extends JFrame{
         anotarPuntaje.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
                 PuntajeDiezmil puntosJugador =getJugadorDeTurno(game).getPuntosDiez();
                 puntosJugador.setPuntajeTotal(puntosJugador.getPuntajeTiro());
                 if (puntosJugador.getPuntajeTiro()==0)
@@ -97,14 +98,14 @@ public class MenuDiez extends JFrame{
     /**
      * inicia la tabla de puntuacion y carga los nombres y los puntajes de cada uno
      */
-    private void iniciarTablaPuntajes()
+    @Override
+    public void iniciarPuntajes()
     {
         ArrayList<Jugador>players  =game.getJugadores();
         editor = new JTextPane[players.size()];
         punt = new JTextPane[players.size()];
         editorPaneJUGADOR = new JTextPane();
         editorPanePUNTAJE = new JTextPane();
-
 
         editorPaneJUGADOR.setFont(new Font("Arial Black",Font.PLAIN,20));
 
@@ -176,7 +177,7 @@ public class MenuDiez extends JFrame{
     /**
      * inicializa los dados en el panel principal y les asigna una imagen
      */
-    private void iniciarLabelsDado()
+    public void iniciarLabelsDado()
     {
         labelDado = new JLabelDado[5];
         ImageIcon imagen = new ImageIcon("Imagenes\\6.png");
@@ -188,18 +189,25 @@ public class MenuDiez extends JFrame{
     }
 
     /**
+     * inicia todos los botones
+     */
+    @Override
+    public void iniciarBotones() {
+        iniciarBotonTirarDados();
+        iniciarBotonAnotarPuntaje();
+    }
+
+    /**
      * inicializa el JTextPane del puntaje en juego
      */
     private void iniciarPuntajeEnJuego ()
     {
         Jugador j = game.getJugadores().get(game.getTurno());
         puntajeEnJuego = new JTextPane();
-
         StyledDocument doc = puntajeEnJuego.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
-
         puntajeEnJuego.setPreferredSize(new Dimension(400,65));
         puntajeEnJuego.setBackground(new Color(9,65,0));
         puntajeEnJuego.setFont(new Font("Arial Black",Font.PLAIN,18));
@@ -248,7 +256,7 @@ public class MenuDiez extends JFrame{
     /**
      * Inicializa un JLabel y setea el texto con el nombre del jugador que le corresponde jugar
      */
-    private void iniciarJLabelTurno()
+    public void iniciarJLabelTurno()
     {
         jlabelTurno=new JLabel();
 
@@ -276,7 +284,7 @@ public class MenuDiez extends JFrame{
     /**
      * actualiza el texto del JLabelTurno
      */
-    private void actualizarJLabelTurno()
+    public void actualizarJLabelTurno()
     {
         String turno=game.getTurnoJugador();
         jlabelTurno.setText("Turno de: "+turno);
@@ -359,7 +367,7 @@ public class MenuDiez extends JFrame{
     /**
      * crea menu de guardado de partida
      */
-    private void iniciarBarraMenus()
+    public void iniciarBarraMenus()
     {
         JMenuBar menuBar=new JMenuBar();
         JMenu menu=new JMenu("Partida");
@@ -379,5 +387,19 @@ public class MenuDiez extends JFrame{
         menu.add(item);
         this.setJMenuBar(menuBar);
         menuBar.setVisible(true);
+    }
+
+    /**
+     * agrega el icono para barra de tareas
+     */
+    private void iniciarIcono()
+    {
+        try
+        {
+            setIconImage(ImageIO.read(new File("Imagenes/IconoCompleto.png")));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -34,7 +34,6 @@ public class Jugador  {
     public Jugador(String nombre, PuntajeGenerala puntosGen) {
         this.nombre = nombre;
         this.puntosGen=puntosGen;
-        //inicializar puntajeDiezmil aca
     }
 
     public String getNombre() {
