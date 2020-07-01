@@ -68,7 +68,7 @@ public class CalculadoraPuntosGenerala {
     private static int calcularGeneralaDoble(ArrayList<Integer> frec,PuntajeGenerala puntos)
     {
         int a=0;
-        if (calcularGenerala(frec)>0 && puntos.getGenerala()!=null)
+        if (calcularGenerala(frec)>0 && !puntos.getGenerala().equals(""))
         {
             a=100;
         }
