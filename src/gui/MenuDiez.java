@@ -43,6 +43,11 @@ public class MenuDiez extends JFrame implements MenuJuego {
 
     private ArrayList<Dado>nuevoTiro;
 
+    /**
+     * Constructor de la interfaz del juego
+     * @param titulo con titulo del juego
+     * @param game juego diezmil
+     */
     public MenuDiez (String titulo,Diezmil game)
     {
         super(titulo);
@@ -360,20 +365,16 @@ public class MenuDiez extends JFrame implements MenuJuego {
      * @return Jugador al que le corresponde jugar
      */
 
-
     private Jugador getJugadorDeTurno (Diezmil game)
     {
         Jugador jugadorDeTurno =new Jugador();
+        int turno =game.getTurno();
         ArrayList<Jugador>jugadores =game.getJugadores();
-        for (Jugador j : jugadores)
-        {
-            if(j.getNombre().equals(game.getTurnoJugador()))
-            {
-                jugadorDeTurno=j;
-            }
-        }
+        jugadorDeTurno = jugadores.get(turno);
+
         return jugadorDeTurno;
     }
+
     /**
      * crea menu de guardado de partida
      */

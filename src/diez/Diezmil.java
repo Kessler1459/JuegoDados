@@ -13,12 +13,20 @@ public class Diezmil  extends Juego {
     private boolean continuar;
     private int tiradas;
 
+    /**
+     * constructor vacio
+     */
     public Diezmil ()
     {
         super();
         continuar = false;
         tiradas=0;
     }
+
+    /**
+     * constructor
+     * @param jugadores con la lista de jugadores
+     */
     public Diezmil (ArrayList<Jugador>jugadores)
     {
         super(jugadores,5);
@@ -26,30 +34,47 @@ public class Diezmil  extends Juego {
         tiradas=0;
     }
 
+    /**
+     * constructor con todos los parametros del juego
+     * @param continuar
+     * @param tiradas
+     * @param jugadores
+     * @param dados
+     * @param turno
+     */
     public Diezmil(boolean continuar, int tiradas, ArrayList<Jugador> jugadores,ArrayList<Dado> dados, int turno)
     {
         super(jugadores,dados,turno);
         this.continuar=continuar;
         this.tiradas=tiradas;
     }
-
+    /**
+     * Reinicia los tiros a 0
+     */
     public void reiniciarTiradas()
     {
         tiradas = 0;
     }
-
+    /**
+     * Devuelve el numero de tiros del turno
+     * @return tiradas
+     */
     public int getTiradas()
     {
         return tiradas;
     }
-
+    /**
+     * Aumenta el numero de tiradas
+     */
     public void aumentarTiradas()
     {
         tiradas++;
     }
 
-
-    public void setContinuar() // define si el jugador puede continuar jugando ya sea porque salio 1 o 5 o cualquier otro numero pero por triplicado
+    /**
+     * setea el continuar como v o f segun salga o no juego
+     */
+    public void setContinuar()
     {
         continuar = false;
         ArrayList<Dado>dados=this.getDados();
@@ -88,7 +113,9 @@ public class Diezmil  extends Juego {
             aumentarTiradas();
 
     }
-
+    /**
+     * aumenta el nro de turno y reinicia los tiros del turno a 0
+     */
 
     @Override
     public void pasarTurno() {
@@ -98,6 +125,10 @@ public class Diezmil  extends Juego {
 
 
     }
+    /**
+     * Tira los dados que no obtuvieron puntos
+     * @return un nuevo arreglo de dados solo con los dados del nuevo tiro
+     */
 
     public ArrayList<Dado> tirarDadosSinPuntos()
     {
@@ -119,30 +150,12 @@ public class Diezmil  extends Juego {
 
         }
 
-
         return nuevoTiro;
     }
-    public void setContinuar (ArrayList<Dado>d)
-    {
-        int i=0;
-        continuar=false;
-        ArrayList<Integer>copia = copiarDados(d);
-        for (i=0;i<copia.size();i++)
-        {
-            if(Collections.frequency(copia,copia.get(i))==3)
-            {
-                continuar=true;
-            }
-            else
-            {
-                if (Collections.frequency(copia,1)>0 || Collections.frequency(copia,5)>0 )
-                {
-                    continuar=true;
-                }
-            }
-
-        }
-    }
+    /**
+     * Indica si en el tiro inicial todos los dados suman puntos
+     * @return 1 si todos sirven o 0 si no sirven todos
+     */
     public int SirvenTodos()
     {
         int rta=1;
@@ -162,11 +175,18 @@ public class Diezmil  extends Juego {
 
         return rta;
     }
-
+    /**
+     * Retorna el valor de la variable continuar
+     * @return true o false
+     */
     public boolean getContinuar ()
     {
         return continuar;
     }
+    /**
+     * Indica si sale o no escalera cuando se tiran los 5 dados
+     * @return boolean true si hay escalera, false si no hay
+     */
 
     public boolean escalera () //otro juego para setear el continuar
     {
@@ -189,7 +209,10 @@ public class Diezmil  extends Juego {
 
         return escalera;
     }
-
+    /**
+     * Indica si al lanzar los 5 dados todos son iguales (diezmil)
+     * @return boolean true si hay diez mil,false si no hay
+     */
     public boolean Diez_mil ()
     {
         boolean rta= false;
@@ -203,6 +226,11 @@ public class Diezmil  extends Juego {
         }
         return rta;
     }
+    /**
+     * Copia los nros de cada dado y los devuelve en un arreglo de enteros
+     * @param dados el arreglo a copiar
+     * @return ArrayList<Integer>copia donde se copia el arreglo de dados
+     */
 
     public ArrayList<Integer> copiarDados(ArrayList<Dado>dados) // copia y devuelve los dados en un arreglo de enteros
     {
@@ -214,8 +242,12 @@ public class Diezmil  extends Juego {
         return copia;
     }
 
-
-    public ArrayList<Integer> calcularFrecuencia(ArrayList<Dado> dados) /// devuelve la frecuencia de cada dado en un nuevo arreglo
+    /**
+     * Devuelve la frecuencia de cada dado en un arreglo de enteros,donde la posicion es el numero del dado
+     * @param dados El arreglo de dados sobre el que se obtienen las frecuencias
+     * @return ArrayList<Integer>frecuencia con las frecuencias de cada numero
+     */
+    public ArrayList<Integer> calcularFrecuencia(ArrayList<Dado> dados)
     {
         ArrayList<Dado> aux=dados;
         ArrayList<Integer> frecuencia=new ArrayList<Integer>();
@@ -226,9 +258,12 @@ public class Diezmil  extends Juego {
         return frecuencia;
     }
 
-    //* DEVUELVE UN ARRAY CON LAS POSICIONES DE LOS DADOS QUE NO SUMAN PUNTOS
-    ///INDICANDO 1 SI SUMA O 0 SI NO SUMA///
 
+    /**
+     * Devuelve un array de enteros indicando 1 para el dado que suma puntos y 0 para el que no
+     * El numero del dado es la posicion del array
+     * @return ArrayList<Integer>sinPuntos con los dados que no suman
+     */
     public ArrayList <Integer>CalcularDadosSinPuntos ()
     {
         ArrayList<Integer> sinPuntos = new ArrayList<>();
@@ -259,9 +294,13 @@ public class Diezmil  extends Juego {
         return sinPuntos;
     }
 
-    /// FUNCION PARA SETEAR LOS DADOS QUE SE PUEDEN VOLVER A TIRAR
-    /// CUANDO SALE MAS DE 3 VECES UN NUMERO QUE NO SEA 1 0 5 SE DEVUELVE LA
-    /// POSICION DE SU ULTIMA APARICION QUE ES EL DADO QUE NO SIRVE
+
+    /**
+     * Busca y retorna la posicion en el arreglo del ultimo dado que
+     * se repite mas de 3 veces y q no es ni 1 ni 5
+     * @return pos la posicion del dado que se puede volver a tirar
+     */
+
     public int devolverUltimaPosicionRepetido()
     {
         int pos=-1;
@@ -279,6 +318,10 @@ public class Diezmil  extends Juego {
         return pos;
     }
 
+    /**
+     * sobreescritura del toString
+     * @return String con la representacion heredada mas la particular
+     */
     @Override
     public String toString() {
         StringBuilder builder=new StringBuilder();
