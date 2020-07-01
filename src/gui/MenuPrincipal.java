@@ -160,39 +160,38 @@ public class MenuPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<Generala> saves=cargarPartidaGenerala();
-                DialogSaves<Generala> dialogo=new DialogSaves(saves);
+                DialogSaves<Generala> dialogo=new DialogSaves<>(saves);
                 dialogo.setVisible(true);
                 ArrayList<Generala> resultado=dialogo.getResultado();
                 JSONArray arrayModificado;
                 if (!resultado.isEmpty())         //recupera las partidas desde el dialogo(por si hubo eliminados) y lo vuelve a escribir
                 {
                     arrayModificado= To.generalaArrayListToJSON(resultado);
-                    Persistencia.escribirArray(arrayModificado,1);
                 }
                 else
                 {
                     arrayModificado=new JSONArray();
-                    Persistencia.escribirArray(arrayModificado,1);
+
                 }
+                Persistencia.escribirArray(arrayModificado,1);
             }
         });
         itemDiezMil.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<Diezmil> saves=cargarPartidaDiezMil();
-                DialogSaves<Diezmil> dialogo=new DialogSaves(saves);
+                DialogSaves<Diezmil> dialogo=new DialogSaves<>(saves);
                 dialogo.setVisible(true);
                 ArrayList<Diezmil> resultado=dialogo.getResultado();
                 JSONArray arrayModificado;
                 if (!resultado.isEmpty())
                 {
                     arrayModificado= To.diezMilArrayListToJSON(resultado);
-                    Persistencia.escribirArray(arrayModificado,0);
                 }
                 else {
                     arrayModificado = new JSONArray();
-                    Persistencia.escribirArray(arrayModificado, 0);
                 }
+                Persistencia.escribirArray(arrayModificado, 0);
             }
         });
         this.setJMenuBar(menuBar);

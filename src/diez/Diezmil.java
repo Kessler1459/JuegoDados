@@ -281,6 +281,12 @@ public class Diezmil  extends Juego {
 
     @Override
     public String toString() {
-        return super.toString()+" tiradas=" + tiradas;
+        StringBuilder builder=new StringBuilder();
+        for (Jugador ju: getJugadores())
+        {
+            builder.append(ju.getNombre()+": "+ju.getPuntosDiez().getPuntajeTotal()+", ");
+        }
+        builder.append(" tiradas=" + tiradas);
+        return builder.toString();
     }
 }

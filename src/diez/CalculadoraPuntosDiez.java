@@ -23,11 +23,10 @@ public class CalculadoraPuntosDiez {
     }
     public static ArrayList<Integer> calcularFrecuencia(ArrayList<Dado> dados) /// devuelve la frecuencia de cada dado en un nuevo arreglo
     {
-        ArrayList<Dado> aux=dados;
         ArrayList<Integer> frecuencia=new ArrayList<Integer>();
         for (int i=1;i<7;i++)
         {
-            frecuencia.add(Collections.frequency(aux,new Dado(i)));
+            frecuencia.add(Collections.frequency(dados,new Dado(i)));
         }
         return frecuencia;
     }
