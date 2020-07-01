@@ -18,27 +18,27 @@ public class DialogPuntos extends JDialog {
     private JPanel contentPane;
     private ArrayList<JButton> botonesParaPuntuar;
     private ArrayList<JButton> botonesParaTachar;
-    private String categoriaSeleccionada;
+    private String categoriaSeleccionada="";
 
     /**constructor
      * @param generala para generar los botones correspondientes
      */
     public DialogPuntos(Generala generala) {
+        this.setMinimumSize(new Dimension(610,250));
+        this.setPreferredSize(new Dimension(10,10));
+        this.setResizable(false);
+        this.setModal(true);
+        this.setTitle("Anotar:");
+        Dimension tamanioPantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation((int)(tamanioPantalla.width*0.46),(int)(tamanioPantalla.height*0.36));
         botonesParaPuntuar =new ArrayList<JButton>();
         botonesParaTachar = new ArrayList<JButton>();
-        categoriaSeleccionada="";
-        this.setUndecorated(true);
-        this.setResizable(false);
-        this.setContentPane(contentPane);
+        contentPane=new JPanel(new GridLayout(0,3,7,7));
         contentPane.setBackground(new Color(0x094100));
-        this.setMinimumSize(new Dimension(250,617));
-        this.setMaximumSize(new Dimension(250,617)); //todo probar localizacion en pantalla mas chica y sacar la X
-        this.setModal(true);
-        this.pack();
-        this.setLocation(1550,216);
+        this.setContentPane(contentPane);
         generarOpciones(generala);
-        agregarBotones();
         agregarBotonSeguirTirando(generala);
+        agregarBotones();
         this.setVisible(true);
     }
 
@@ -151,6 +151,10 @@ public class DialogPuntos extends JDialog {
         }
     }
 
+    /**
+     * devuelve la categoria elegida en la que se anotara
+     * @return
+     */
     public String getCategoriaSeleccionada() {
         return categoriaSeleccionada;
     }

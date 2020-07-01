@@ -6,19 +6,21 @@ import clases.Jugador;
 import org.json.JSONArray;
 import persistencia.Persistencia;
 import persistencia.To;
-
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class MenuPrincipal extends JFrame {
 
     private MenuGenerala menuGenerala;
     private ArrayList<Jugador> jugadores;
-
     private JPanel jPanel;
     private JCheckBox checkJugador4;
     private JCheckBox checkJugador3;
@@ -40,6 +42,7 @@ public class MenuPrincipal extends JFrame {
      */
     public MenuPrincipal(String titulo) {
         super(titulo);
+        iniciarIcono();
         this.setContentPane(jPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
@@ -54,6 +57,7 @@ public class MenuPrincipal extends JFrame {
                 {
                     Generala generala = new Generala(jugadores);
                     menuGenerala = new MenuGenerala("Generala", generala);
+                    jugadores=new ArrayList<>();
                 }
             }
         });
@@ -80,6 +84,7 @@ public class MenuPrincipal extends JFrame {
                 {
                     Diezmil game = new Diezmil(jugadores);
                     MenuDiez menu10 = new MenuDiez("Diezmil",game);
+                    jugadores=new ArrayList<>();
                 }
             }
         });
@@ -219,5 +224,19 @@ public class MenuPrincipal extends JFrame {
         JSONArray jsonArray=Persistencia.levantarArchivo(0);
         saves=To.toArrayListDiezMil(jsonArray);
         return saves;
+    }
+
+    /**
+     * agrega el icono para barra de tareas
+     */
+    private void iniciarIcono()
+    {
+        try
+        {
+            setIconImage(ImageIO.read(new File("Imagenes/IconoCompleto.png")));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

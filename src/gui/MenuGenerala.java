@@ -1,24 +1,27 @@
 package gui;
 
+import Interfaces.MenuJuego;
 import clases.Dado;
 import gene.Generala;
 import clases.Jugador;
 import gene.PuntajeGenerala;
 import persistencia.Persistencia;
-import persistencia.To;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 /**
  * frame principal de la Generala
  */
-public class MenuGenerala extends JFrame {
+public class MenuGenerala extends JFrame implements MenuJuego {
 
     private Generala generala;
     private DialogPuntos dialogo;
@@ -32,6 +35,7 @@ public class MenuGenerala extends JFrame {
 
     public MenuGenerala(String titulo, Generala gene) {
         super(titulo);
+        iniciarIcono();
         this.generala = gene;
         this.setContentPane(panelPrincipal);
         this.pack();
@@ -40,17 +44,18 @@ public class MenuGenerala extends JFrame {
         this.setVisible(true);
         iniciarBarraMenus();
         iniciarLabelsDado();
-        iniciarBotonTirarDados();
+        iniciarBotones();
         iniciarJLabelTurno();
         actualizarJLabelTurno();
-        iniciarTable(generala.getJugadores());
+        iniciarPuntajes();
     }
 
 
     /**
      * inicializa el arreglo de JlabelDado, les setea una imagen inicial y lo agrega al panel de dados
      */
-    private void iniciarLabelsDado()
+    @Override
+    public void iniciarLabelsDado()
     {
         labelDado = new JLabelDado[5];
         ImageIcon imagen = new ImageIcon("Imagenes\\6.png");
@@ -65,7 +70,8 @@ public class MenuGenerala extends JFrame {
     /**
      * inicializa, setea y agrega el boton de tirar al panel de los dados
      */
-    private void iniciarBotonTirarDados()
+    @Override
+    public void iniciarBotones()
     {
         btnTirar = new JButton("Tirar Dados");
         btnTirar.setFont(new Font("Arial Black",Font.PLAIN,16));
@@ -111,7 +117,8 @@ public class MenuGenerala extends JFrame {
     /**
      * label que indica el nombre del jugador que tiene el turno
      */
-    private void iniciarJLabelTurno()
+    @Override
+    public void iniciarJLabelTurno()
     {
         jlabelTurno=new JLabel();
         jlabelTurno.setMinimumSize(new Dimension(200,40));
@@ -121,7 +128,11 @@ public class MenuGenerala extends JFrame {
         jlabelTurno.setLabelFor(btnTirar);
     }
 
-    private void actualizarJLabelTurno()
+    /**
+     * actualiza el JLabel con el nombre del jugador del turno actual
+     */
+    @Override
+    public void actualizarJLabelTurno()
     {
         Jugador jugador=generala.getJugadores().get(generala.getTurno());
         jlabelTurno.setText("Turno de: "+jugador.getNombre());
@@ -222,9 +233,10 @@ public class MenuGenerala extends JFrame {
 
     /**
      * inicializa la tabla con las categorias y jugadores
-     * @param jugadores el arreglo de jugadores para la tabla
      */
-    private void iniciarTable(ArrayList<Jugador> jugadores) {
+    @Override
+    public void iniciarPuntajes() {
+        ArrayList<Jugador> jugadores=generala.getJugadores();
         DefaultTableModel tablemodel = new DefaultTableModel(12, jugadores.size() + 1);
         String[] categorias = {"","Generala doble", "Generala", "Poker", "Full", "Escalera", "1", "2", "3", "4", "5", "6"};
         int i = 1;
@@ -264,7 +276,8 @@ public class MenuGenerala extends JFrame {
     /**
      * escribe la tabla entera con los puntajes de los jugadores(se usa al reanudar partida)
      */
-    public void cargarTabla()
+    @Override
+    public void actualizarPuntajes()
     {
         ArrayList<Jugador> jugadores=generala.getJugadores();
         for (int i=0; i<jugadores.size(); i++)
@@ -281,7 +294,8 @@ public class MenuGenerala extends JFrame {
     /**
      * crea menu de guardado de partida
      */
-    private void iniciarBarraMenus()
+    @Override
+    public void iniciarBarraMenus()
     {
         JMenuBar menuBar=new JMenuBar();
         JMenu menu=new JMenu("Partida");
@@ -303,4 +317,17 @@ public class MenuGenerala extends JFrame {
         menuBar.setVisible(true);
     }
 
+    /**
+     * agrega el icono para barra de tareas
+     */
+    private void iniciarIcono()
+    {
+        try
+        {
+            setIconImage(ImageIO.read(new File("Imagenes/IconoCompleto.png")));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

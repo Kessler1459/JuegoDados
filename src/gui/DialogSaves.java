@@ -2,7 +2,6 @@ package gui;
 
 
 import clases.Juego;
-import clases.Jugador;
 import diez.Diezmil;
 import gene.Generala;
 
@@ -66,7 +65,7 @@ public class DialogSaves <T extends Juego> extends JDialog {
                         Generala ge=(Generala) ju;
                         MenuGenerala menuGen=new MenuGenerala("Generala",ge);
                         menuGen.actualizarImagenDados();
-                        menuGen.cargarTabla();
+                        menuGen.actualizarPuntajes();
                     }
                     else
                     {
