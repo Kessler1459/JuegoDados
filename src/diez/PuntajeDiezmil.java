@@ -1,6 +1,8 @@
 package diez;
 
 
+import Excepciones.ExcepcionFinalDePartida;
+
 public class PuntajeDiezmil {
 
     private  int puntajeTotal=0;
@@ -8,10 +10,12 @@ public class PuntajeDiezmil {
 
 
 
-    public  void setPuntajeTotal (int ptos)
-    {
-
+    public  void setPuntajeTotal (int ptos) throws ExcepcionFinalDePartida {
         puntajeTotal+=ptos;
+        if (puntajeTotal>=10000)
+        {
+            throw new ExcepcionFinalDePartida();
+        }
     }
     public void setPuntajeTiro(int ptos)
     {

@@ -2,6 +2,7 @@ package gui;
 
 import Interfaces.MenuJuego;
 import clases.Dado;
+import Excepciones.ExcepcionFinalDePartida;
 import gene.Generala;
 import clases.Jugador;
 import gene.PuntajeGenerala;
@@ -95,15 +96,15 @@ public class MenuGenerala extends JFrame implements MenuJuego {
                 if (!categoriaSeleccionada.equals(""))                                      //si fue seleccionada una categoria, se anota y se pasa de turno
                 {
                     anotarEnTabla(categoriaSeleccionada,jugadorDeTurno.getPuntosGen());
-                    generala.pasarTurno();
-                    if (generala.comprobarFinalDePartida())                                 //si la partida llego al final se muestra el dialogo con los resultados finales
+                    try
+                    {
+                        generala.pasarTurno();                                //si la partida llega a su ultimo turno se muestran los resultados finales
+                    }
+                    catch (ExcepcionFinalDePartida ex)
                     {
                         dialogoResultadosFinales();
                     }
-                    else
-                    {
-                        actualizarJLabelTurno();
-                    }
+                    actualizarJLabelTurno();
                 }
                 else                                                                        //si se decide seguir tirando se aumenta el numero de tirada
                 {

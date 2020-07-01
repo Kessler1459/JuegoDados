@@ -1,5 +1,6 @@
 package gene;
 
+import Excepciones.ExcepcionFinalDePartida;
 import clases.Juego;
 import clases.Jugador;
 import clases.Dado;
@@ -23,12 +24,25 @@ public class Generala extends Juego {
         tiradas=0;
         duracionDePartida=0;
     }
+
+    /**
+     * constructor para iniciar la partida
+     * @param jugadores
+     */
     public Generala(ArrayList<Jugador> jugadores) {
         super(jugadores,5);
         duracionDePartida=0;
         tiradas=0;
     }
 
+    /**
+     * constructor con todos los datos para las cargas de partida
+     * @param duracionDePartida
+     * @param tiradas
+     * @param jugadores
+     * @param dados
+     * @param turno
+     */
     public Generala(int duracionDePartida, int tiradas, ArrayList<Jugador> jugadores, ArrayList<Dado> dados, int turno ) {
     	super(jugadores, dados, turno);
     	this.duracionDePartida = duracionDePartida;
@@ -48,10 +62,14 @@ public class Generala extends Juego {
      * al pasar de turno reinicia el numero de tiradas tambien
      */
     @Override
-    public void pasarTurno() {
+    public void pasarTurno() throws ExcepcionFinalDePartida {
         super.pasarTurno();
         duracionDePartida++;
         tiradas=0;
+        if (comprobarFinalDePartida())
+        {
+            throw new ExcepcionFinalDePartida();
+        }
     }
 
     /**
@@ -62,10 +80,16 @@ public class Generala extends Juego {
         return duracionDePartida == getJugadores().size() * 11;
     }
 
+    /**
+     * @return numero de tiradas de dados del turno actual
+     */
     public int getTiradas() {
         return tiradas;
     }
 
+    /**
+     * @return duracion total de la partida
+     */
     public int getDuracionDePartida() {
         return duracionDePartida;
     }

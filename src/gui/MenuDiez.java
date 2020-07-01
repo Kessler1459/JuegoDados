@@ -6,6 +6,7 @@ import clases.Jugador;
 import diez.CalculadoraPuntosDiez;
 import diez.Diezmil;
 import diez.PuntajeDiezmil;
+import Excepciones.ExcepcionFinalDePartida;
 import persistencia.Persistencia;
 
 import javax.imageio.ImageIO;
@@ -50,6 +51,7 @@ public class MenuDiez extends JFrame implements MenuJuego {
         this.pack();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        iniciarIcono();
         this.setVisible(true);
         iniciarBarraMenus();
         iniciarPuntajeEnJuego();
@@ -77,7 +79,14 @@ public class MenuDiez extends JFrame implements MenuJuego {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PuntajeDiezmil puntosJugador =getJugadorDeTurno(game).getPuntosDiez();
-                puntosJugador.setPuntajeTotal(puntosJugador.getPuntajeTiro());
+                try
+                {
+                    puntosJugador.setPuntajeTotal(puntosJugador.getPuntajeTiro());
+                }
+                catch (ExcepcionFinalDePartida exc)
+                {
+                    buscarGanador();
+                }
                 if (puntosJugador.getPuntajeTiro()==0)
                 {
                     JOptionPane.showMessageDialog(null,"NO TIENE PUNTOS QUE ANOTAR");
@@ -240,6 +249,7 @@ public class MenuDiez extends JFrame implements MenuJuego {
         if (players.get(i).getPuntosDiez().getPuntajeTotal()>=10000)
         {
             JOptionPane.showMessageDialog(null,"FELICITACIONES "+players.get(i).getNombre()+" GANA EL JUEGO");
+            dispose();
         }
     }
 
